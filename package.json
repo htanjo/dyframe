@@ -1,0 +1,9 @@
+{
+  "name": "dyframe",
+  "version": "0.0.0",
+  "description": "Render dynamic HTML page into element",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "devDependencies": {}
+}
