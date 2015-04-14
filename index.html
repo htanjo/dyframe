@@ -17,9 +17,10 @@
     <script src="dyframe.js"></script>
     <script>
       var el = document.getElementById('dyframe');
-      var src = '<html><body><h1>Demo</h1><p>Hello, world!</p></body></html>';
+      var src = '<html><head><meta name="viewport" content="width=device-width, initial-scale=1"></head><body><h1>Demo</h1><p>Hello, world!</p></body></html>';
       new Dyframe(el, {
-        src: src
+        src: src,
+        profile: 'smartphone'
       });
     </script>
   </body>

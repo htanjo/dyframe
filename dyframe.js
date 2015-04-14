@@ -66,8 +66,7 @@
 
   // Scale preview accroding to options
   Dyframe.prototype.scale = function () {
-    // var profile = profiles[this.options.profile];
-    var scale = this.width / this.options.width;
+    var scale = this.width / this.getPreviewWidth();
     setStyles(this.viewport, {
       width: (100 / scale) + '%',
       height: (100 / scale) + '%',
@@ -75,6 +74,47 @@
       msTransform: 'scale(' + scale + ')',
       transform: 'scale(' + scale + ')'
     });
+  };
+
+  // Get preview HTML width
+  Dyframe.prototype.getPreviewWidth = function () {
+    if (!this.options.profile || !profiles[this.options.profile]) {
+      return this.options.width;
+    }
+    var viewportData = this.getViewportData();
+    var width = viewportData.width;
+    if (!width) {
+      return baseWidth;
+    }
+    if (width === 'device-width') {
+      return profiles[this.options.profile];
+    }
+    return parseInt(width, 10);
+  };
+
+  // Get viewport content as object
+  Dyframe.prototype.getViewportData = function () {
+    var el = document.createElement('div');
+    var viewportElement;
+    var viewportContent;
+    var viewportData = {};
+    el.innerHTML = this.options.src;
+    viewportElement = el.querySelector('meta[name="viewport"]');
+    if (!viewportElement) {
+      return viewportData;
+    }
+    viewportContent = viewportElement.getAttribute('content');
+    if (!viewportContent) {
+      return viewportData;
+    }
+    viewportContent.split(',').forEach(function (configSet) {
+      var config = configSet.trim().split('=');
+      if (!config[0] || !config[1]) {
+        return;
+      }
+      viewportData[config[0].trim()] = config[1].trim();
+    });
+    return viewportData;
   };
 
   // Utility for merging objects
