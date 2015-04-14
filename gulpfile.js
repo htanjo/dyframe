@@ -2,8 +2,21 @@
 
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
+var fs = require('fs');
 var browserSync = require('browser-sync');
-var pkg = require('./package.json');
+var runSequence = require('run-sequence');
+var minimist = require('minimist');
+
+var getJson = function (filepath) {
+  return JSON.parse(fs.readFileSync(filepath, 'utf8'));
+};
+var knownOptions = {
+  string: 'bump',
+  default: {
+    bump: 'patch'
+  }
+};
+var options = minimist(process.argv.slice(2), knownOptions);
 var banner = [
   '/*!',
   ' * Dyframe',
@@ -21,7 +34,8 @@ gulp.task('jshint', function () {
     .pipe($.if(!browserSync.active, $.jshint.reporter('fail')));
 });
 
-gulp.task('scripts', ['jshint'], function () {
+gulp.task('scripts', function () {
+  var pkg = getJson('package.json');
   return gulp.src('src/*.js')
     .pipe($.header(banner, {pkg: pkg}))
     .pipe(gulp.dest('.'))
@@ -42,4 +56,18 @@ gulp.task('serve', function () {
   gulp.watch('src/*.js', ['jshint']);
 });
 
-gulp.task('default', ['scripts']);
+gulp.task('bump', function () {
+  return gulp.src(['package.json', 'bower.json'])
+    .pipe($.bump({type: options.bump}))
+    .pipe(gulp.dest('.'));
+});
+
+gulp.task('test', ['jshint']);
+
+gulp.task('build', ['scripts']);
+
+gulp.task('release', function (callback) {
+  runSequence('test', 'bump', 'build', callback);
+});
+
+gulp.task('default', ['test']);
