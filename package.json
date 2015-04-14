@@ -22,6 +22,9 @@
   "engines": {
     "node": ">=0.10.0"
   },
+  "scripts": {
+    "test": "gulp test"
+  },
   "main": "dyframe.js",
   "files": [
     "dyframe.js",
