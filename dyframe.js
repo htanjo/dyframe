@@ -26,11 +26,9 @@
 
   // Constructor
   var Dyframe = function (element, options) {
-    this.options = mergeObjects({}, defaults, options);
+    this.element = element;
     this.wrapper = document.createElement('div');
     this.viewport = document.createElement('iframe');
-    this.width = element.clientWidth;
-    this.height = element.clientHeight;
     setStyles(this.wrapper, {
       position: 'relative',
       display: 'block',
@@ -52,16 +50,31 @@
     });
     this.wrapper.appendChild(this.viewport);
     element.appendChild(this.wrapper);
-    this.render();
-  }
+    this.render(options);
+  };
 
   // Render viewport
-  Dyframe.prototype.render = function () {
+  Dyframe.prototype.render = function (options) {
+    if (typeof options === 'object') {
+      this.updateOptions(options);
+    }
+    this.width = this.element.clientWidth;
+    this.height = this.element.clientHeight;
     this.wrapper.style.paddingBottom = this.height + 'px';
     this.scale();
     this.viewport.contentWindow.document.open();
     this.viewport.contentWindow.document.write(this.options.html);
     this.viewport.contentWindow.document.close();
+  };
+
+  // Override options
+  Dyframe.prototype.updateOptions = function (options) {
+    if (!this.options) {
+      this.options = mergeObjects({}, defaults, options);
+    }
+    else {
+      mergeObjects(this.options, options);
+    }
   };
 
   // Scale preview accroding to options

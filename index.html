@@ -18,10 +18,15 @@
     <script>
       var el = document.getElementById('dyframe');
       var html = '<html><head><meta name="viewport" content="width=device-width, initial-scale=1"></head><body><h1>Demo</h1><p>Hello, world!</p></body></html>';
-      new Dyframe(el, {
+      var dyframe = new Dyframe(el, {
         html: html,
         profile: 'smartphone'
       });
+      setTimeout(function () {
+        dyframe.render({
+          html: '<html><head><meta name="viewport" content="width=device-width, initial-scale=1"></head><body><h1>Demo</h1><p>Updated!</p></body></html>'
+        });
+      }, 1000);
     </script>
   </body>
 </html>
