@@ -1,10 +1,3 @@
-/*!
- * Dyframe
- * @version 0.0.0
- * @link https://github.com/htanjo/dyframe
- * @author Tanjo, Hiroyuki
- * @license MIT
- */
 (function () {
   'use strict';
 
