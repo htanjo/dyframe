@@ -1,5 +1,29 @@
 {
   "name": "dyframe",
   "version": "0.0.0",
-  "description": "Render dynamic HTML page into element"
+  "description": "Render dynamic HTML page into element",
+  "authors": [
+    "Tanjo, Hiroyuki"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/htanjo/dyframe.git"
+  },
+  "homepage": "https://github.com/htanjo/dyframe",
+  "keywords": [
+    "javascript",
+    "html",
+    "iframe",
+    "viewport"
+  ],
+  "main": "dyframe.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "package.json",
+    "gulpfile.js",
+    "index.html"
+  ]
 }
