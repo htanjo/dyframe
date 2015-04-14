@@ -6,8 +6,23 @@
 ;(function () {
   'use strict';
 
+  // Device profiles
+  var profiles = {
+    tablet: 768,
+    tabletLandscape: 1024,
+    smartphone: 375,
+    smartphoneLandscape: 667
+  };
+
+  // Default viewport width
+  var baseWidth = 980;
+
   // Default options
-  var defaults = {};
+  var defaults = {
+    src: '',
+    width: baseWidth,
+    profile: ''
+  };
 
   // Constructor
   var Dyframe = function (element, options) {
@@ -43,9 +58,23 @@
   // Render viewport
   Dyframe.prototype.render = function () {
     this.wrapper.style.paddingBottom = this.height + 'px';
+    this.scale();
     this.viewport.contentWindow.document.open();
     this.viewport.contentWindow.document.write(this.options.src);
     this.viewport.contentWindow.document.close();
+  };
+
+  // Scale preview accroding to options
+  Dyframe.prototype.scale = function () {
+    // var profile = profiles[this.options.profile];
+    var scale = this.width / this.options.width;
+    setStyles(this.viewport, {
+      width: (100 / scale) + '%',
+      height: (100 / scale) + '%',
+      webkitTransform: 'scale(' + scale + ')',
+      msTransform: 'scale(' + scale + ')',
+      transform: 'scale(' + scale + ')'
+    });
   };
 
   // Utility for merging objects
