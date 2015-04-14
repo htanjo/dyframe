@@ -19,7 +19,7 @@
 
   // Default options
   var defaults = {
-    src: '',
+    html: '',
     width: baseWidth,
     profile: ''
   };
@@ -60,7 +60,7 @@
     this.wrapper.style.paddingBottom = this.height + 'px';
     this.scale();
     this.viewport.contentWindow.document.open();
-    this.viewport.contentWindow.document.write(this.options.src);
+    this.viewport.contentWindow.document.write(this.options.html);
     this.viewport.contentWindow.document.close();
   };
 
@@ -98,7 +98,7 @@
     var viewportElement;
     var viewportContent;
     var viewportData = {};
-    el.innerHTML = this.options.src;
+    el.innerHTML = this.options.html;
     viewportElement = el.querySelector('meta[name="viewport"]');
     if (!viewportElement) {
       return viewportData;
