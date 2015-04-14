@@ -62,12 +62,23 @@ gulp.task('bump', function () {
     .pipe(gulp.dest('.'));
 });
 
+gulp.task('commit', function () {
+  var version = getJson('package.json').version;
+  return gulp.src(['package.json', 'bower.json', '*.js'])
+    .pipe($.git.commit('Release v' + version));
+});
+
+gulp.task('tag', function (callback) {
+  var version = getJson('package.json').version;
+  $.git.tag('v' + version, 'Release v' + version, callback);
+});
+
 gulp.task('test', ['jshint']);
 
 gulp.task('build', ['scripts']);
 
 gulp.task('release', function (callback) {
-  runSequence('test', 'bump', 'build', callback);
+  runSequence('test', 'bump', 'build', 'commit', 'tag', callback);
 });
 
 gulp.task('default', ['test']);
