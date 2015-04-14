@@ -1,9 +1,9 @@
-/**
+/*!
  * @license Dyframe
  * (c) 2015 Tanjo, Hiroyuki. https://github.com/htanjo/dyframe
  * License: MIT
  */
-;(function () {
+(function () {
   'use strict';
 
   // Device profiles
