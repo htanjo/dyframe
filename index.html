@@ -3,9 +3,24 @@
   <head>
     <meta charset="utf-8">
     <title>Dyframe</title>
+    <style>
+      #dyframe {
+        width: 360px;
+        height: 480px;
+        border: 1px solid #ddd;
+      }
+    </style>
   </head>
   <body>
-
+    <h1>Dyframe</h1>
+    <div id="dyframe"></div>
     <script src="dyframe.js"></script>
+    <script>
+      var el = document.getElementById('dyframe');
+      var src = '<html><body>Hello, world!</body></html>';
+      new Dyframe(el, {
+        src: src
+      });
+    </script>
   </body>
 </html>
