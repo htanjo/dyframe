@@ -26,5 +26,8 @@
     "gulpfile.js",
     "src",
     "demo"
-  ]
+  ],
+  "devDependencies": {
+    "bootstrap": "~3.3.4"
+  }
 }

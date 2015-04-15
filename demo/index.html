@@ -3,11 +3,112 @@
   <head>
     <meta charset="utf-8">
     <title>Dyframe</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="demo.css">
   </head>
   <body>
-    <h1>Dyframe</h1>
-    <div id="dyframe"></div>
+    <div class="container">
+      <h1>Dyframe</h1>
+      <div class="row">
+        <div class="col-sm-4">
+          <h2>Basic</h2>
+          <div class="dyframe" id="dyframe-basic"></div>
+        </div>
+        <div class="col-sm-4">
+          <h2>Width 1200px</h2>
+          <div class="dyframe" id="dyframe-width"></div>
+        </div>
+        <div class="col-sm-4">
+          <h2>Width 1600px</h2>
+          <div class="dyframe" id="dyframe-width-2"></div>
+        </div>
+        <div class="col-sm-4">
+          <h2>Tablet</h2>
+          <div class="dyframe" id="dyframe-tablet"></div>
+        </div>
+        <div class="col-sm-4">
+          <h2>Smartphone</h2>
+          <div class="dyframe" id="dyframe-smartphone"></div>
+        </div>
+        <div class="col-sm-4">
+          <h2>Re-rendering</h2>
+          <div class="dyframe" id="dyframe-render"></div>
+        </div>
+      </div>
+      <div class="form">
+        <h2>HTML source</h2>
+        <textarea class="form-control" id="input" rows="15">
+&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;Awesome Site&lt;/title&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+    &lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.min.css"&gt;
+    &lt;style&gt;
+      body { padding-top: 70px; }
+      h1 { margin-bottom: 20px; }
+      h2 { margin-top: 30px; }
+      .container { margin-bottom: 20px; }
+      .col-sm-4 h3 { margin-top: 0; }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div class="container"&gt;
+      &lt;nav class="navbar navbar-inverse navbar-fixed-top"&gt;
+        &lt;div class="container-fluid"&gt;
+          &lt;div class="navbar-header"&gt;
+            &lt;button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse"&gt;
+              &lt;span class="sr-only"&gt;Toggle navigation&lt;/span&gt;
+              &lt;span class="icon-bar"&gt;&lt;/span&gt;
+              &lt;span class="icon-bar"&gt;&lt;/span&gt;
+              &lt;span class="icon-bar"&gt;&lt;/span&gt;
+            &lt;/button&gt;
+            &lt;a class="navbar-brand" href="#"&gt;Awesome Site&lt;/a&gt;
+          &lt;/div&gt;
+          &lt;div class="collapse navbar-collapse" id="navbar-collapse"&gt;
+            &lt;ul class="nav navbar-nav"&gt;
+              &lt;li class="active"&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;a href="#"&gt;Link&lt;/a&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;a href="#"&gt;Link&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/nav&gt;
+      &lt;h1 class="text-center"&gt;Welcome to Awesome Site!&lt;/h1&gt;
+      &lt;p class="text-center"&gt;
+        &lt;img src="http://lorempixel.com/240/240/city/4" alt="" width="240" height="240" class="img-circle"&gt;
+      &lt;/p&gt;
+      &lt;h2&gt;About&lt;/h2&gt;
+      &lt;p class="lead"&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nibh augue, fermentum condimentum lobortis ac, mollis ut odio. Mauris dignissim nec ligula sit amet hendrerit. Morbi sed massa non nisl lacinia pharetra vitae non felis. Integer pulvinar ornare odio, non facilisis est interdum id.&lt;/p&gt;
+      &lt;h2&gt;Friends&lt;/h2&gt;
+      &lt;div class="row"&gt;
+        &lt;div class="col-sm-4"&gt;
+          &lt;h3&gt;Giggles&lt;/h3&gt;
+          &lt;p&gt;Interdum et malesuada fames ac ante ipsum primis in faucibus. Nullam commodo maximus lectus ac cursus. Donec malesuada tortor nibh, vel imperdiet purus facilisis ut. Praesent vulputate quam sed metus maximus mattis.&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class="col-sm-4"&gt;
+          &lt;h3&gt;Lumpy&lt;/h3&gt;
+          &lt;p&gt;Duis diam nisl, viverra id sagittis sed, ultricies in lorem. Cras tellus tellus, sagittis non commodo sit amet, sagittis id dolor. Aliquam non blandit enim, nec interdum est.&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class="col-sm-4"&gt;
+          &lt;h3&gt;Sniffles&lt;/h3&gt;
+          &lt;p&gt;Nulla vehicula, metus quis malesuada cursus, velit quam aliquam eros, ac pulvinar turpis velit quis nisi. Cras non volutpat lectus. Nam ut lacus luctus, tempor lectus vel, blandit ex. Aliquam vitae nibh mi.&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;hr&gt;
+      &lt;p class="text-center text-muted"&gt;Copyright (c) 2015 Awesome Site&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"&gt;&lt;/script&gt;
+    &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</textarea>
+      </div>
+      <div class="footer">
+        <p class="small text-muted">Copyright &copy; 2015 Tanjo, Hiroyuki</p>
+      </div>
+    </div>
     <script src="../src/dyframe.js"></script>
     <script src="demo.js"></script>
   </body>

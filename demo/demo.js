@@ -2,16 +2,76 @@
   'use strict';
 
   var Dyframe = window.Dyframe;
-  var element = document.getElementById('dyframe');
-  var html = '<html><head><meta name="viewport" content="width=device-width, initial-scale=1"></head><body><h1>Demo</h1><p>Hello, world!</p></body></html>';
-  var dyframe = new Dyframe(element, {
+
+  var input = document.getElementById('input');
+  var html = input.value;
+  var dyframes = [];
+
+  // Basic
+  var basicElement = document.getElementById('dyframe-basic');
+  dyframes.push(new Dyframe(basicElement, {
+    html: html
+  }));
+
+  // Width 1200px
+  var widthElement = document.getElementById('dyframe-width');
+  dyframes.push(new Dyframe(widthElement, {
+    html: html,
+    width: 1200
+  }));
+
+  // Width 1600px
+  var width2Element = document.getElementById('dyframe-width-2');
+  dyframes.push(new Dyframe(width2Element, {
+    html: html,
+    width: 1600
+  }));
+
+  // Tablet
+  var tabletElement = document.getElementById('dyframe-tablet');
+  dyframes.push(new Dyframe(tabletElement, {
+    html: html,
+    profile: 'tablet'
+  }));
+
+  // Smartphone
+  var smartphoneElement = document.getElementById('dyframe-smartphone');
+  dyframes.push(new Dyframe(smartphoneElement, {
     html: html,
     profile: 'smartphone'
+  }));
+
+  // Re-rendering
+  var renderElement = document.getElementById('dyframe-render');
+  var renderDyframe = new Dyframe(renderElement, {
+    html: html
   });
-  setTimeout(function () {
-    dyframe.render({
-      html: '<html><head><meta name="viewport" content="width=device-width, initial-scale=1"></head><body><h1>Demo</h1><p>Updated!</p></body></html>'
+  dyframes.push(renderDyframe);
+  var renderProfile = '';
+  setInterval(function () {
+    switch (renderProfile) {
+      case '':
+        renderProfile = 'tablet';
+        break;
+      case 'tablet':
+        renderProfile = 'smartphone';
+        break;
+      case 'smartphone':
+        renderProfile = '';
+        break;
+    }
+    renderDyframe.render({
+      profile: renderProfile
     });
-  }, 1000);
+  }, 3000);
+
+  // Sync HTML content with textarea value
+  input.addEventListener('change', function () {
+    dyframes.forEach(function (dyframe) {
+      dyframe.render({
+        html: input.value
+      });
+    });
+  }, false);
 
 }).call(this);
