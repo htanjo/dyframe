@@ -11,9 +11,7 @@
   // Device profiles
   var profiles = {
     tablet: 768,
-    tabletLandscape: 1024,
-    smartphone: 375,
-    smartphoneLandscape: 667
+    smartphone: 375
   };
 
   // Default viewport width
@@ -60,8 +58,9 @@
     if (typeof options === 'object') {
       this.updateOptions(options);
     }
-    this.width = this.element.clientWidth;
-    this.height = this.element.clientHeight;
+    var innerSize = getInnerSize(this.element);
+    this.width = innerSize.width;
+    this.height = innerSize.height;
     this.wrapper.style.paddingBottom = this.height + 'px';
     this.scale();
     this.viewport.contentWindow.document.open();
@@ -153,6 +152,20 @@
     for (prop in styles) {
       element.style[prop] = styles[prop];
     }
+  };
+
+  // Get inner width/height of element
+  var getInnerSize = function (element) {
+    var style = window.getComputedStyle(element);
+    var paddingTop = parseInt(style.getPropertyValue('padding-top'), 0);
+    var paddingLeft = parseInt(style.getPropertyValue('padding-left'), 0);
+    var paddingRight = parseInt(style.getPropertyValue('padding-right'), 0);
+    var paddingBottom = parseInt(style.getPropertyValue('padding-bottom'), 0);
+    var innerSize = {
+      width: element.clientWidth - (paddingLeft + paddingRight),
+      height: element.clientHeight - (paddingTop + paddingBottom)
+    };
+    return innerSize;
   };
 
   // Module interface
