@@ -24,7 +24,7 @@
     "bower_components",
     "package.json",
     "gulpfile.js",
-    "index.html",
-    "src"
+    "src",
+    "demo"
   ]
 }

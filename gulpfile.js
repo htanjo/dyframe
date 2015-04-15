@@ -6,6 +6,7 @@ var fs = require('fs');
 var browserSync = require('browser-sync');
 var runSequence = require('run-sequence');
 var minimist = require('minimist');
+var opn = require('opn');
 
 var getJson = function (filepath) {
   return JSON.parse(fs.readFileSync(filepath, 'utf8'));
@@ -28,7 +29,7 @@ var banner = [
   ''].join('\n');
 
 gulp.task('jshint', function () {
-  return gulp.src(['gulpfile.js', 'src/*.js'])
+  return gulp.src(['gulpfile.js', 'src/*.js', 'demo/*.js'])
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'))
     .pipe($.if(!browserSync.active, $.jshint.reporter('fail')));
@@ -46,11 +47,15 @@ gulp.task('scripts', function () {
 
 gulp.task('serve', function () {
   browserSync({
+    server: '.',
     notify: false,
-    server: '.'
+    open: false
+  });
+  browserSync.emitter.once('init', function () {
+    opn('http://localhost:3000/demo/');
   });
   gulp.watch([
-    'index.html',
+    'demo/*',
     'src/*.js'
   ]).on('change', browserSync.reload);
   gulp.watch('src/*.js', ['jshint']);
