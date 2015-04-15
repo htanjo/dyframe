@@ -1,7 +1,7 @@
 {
   "name": "dyframe",
   "version": "0.0.1",
-  "description": "Render dynamic HTML page into element",
+  "description": "Dynamically render scaled HTML into iframe",
   "authors": [
     "Tanjo, Hiroyuki"
   ],
