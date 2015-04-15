@@ -66,12 +66,24 @@
   }, 3000);
 
   // Sync HTML content with textarea value
-  input.addEventListener('change', function () {
+  var updateHtml = function () {
     dyframes.forEach(function (dyframe) {
       dyframe.render({
         html: input.value
       });
     });
-  }, false);
+  };
+  var timer;
+  input.addEventListener('change', function () {
+    updateHtml();
+  });
+  input.addEventListener('keyup', function () {
+    if (timer) {
+      clearTimeout(timer);
+    }
+    timer = setTimeout(function () {
+      updateHtml();
+    }, 500);
+  });
 
 }).call(this);
