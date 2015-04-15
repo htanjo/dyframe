@@ -1,9 +1,19 @@
 # Dyframe
 > Render dynamic HTML page into element
 
+[![Dyframe](demo/demo.png)](http://htanjo.github.io/dyframe/demo/)
+
+[**See demo**](http://htanjo.github.io/dyframe/demo/)
+
 ## Getting started
 ### Install
-[Download](dyframe.js?raw=true) and include `dyframe.js`.
+
+Download and include `dyframe.js` to your HTML.
+Available on [Bower](http://bower.io/) and [npm](https://www.npmjs.com/).
+
+* Download: [**dyframe.js**](dyframe.js?raw=true) / [minified](dyframe.min.js?raw=true)
+* Bower: `$ bower install dyframe --save`
+* npm: `$ npm install dyframe --save`
 
 ### Example
 ```html
