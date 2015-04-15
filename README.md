@@ -64,27 +64,32 @@ If you set proper profile, the scaling of HTML will be emulated according to `<m
 
 Supported profiles: `'smartphone'`, `'smartphoneLandscape'`, `'tablet'`, `'tabletLandscape'`
 
-## Methods
-You can access to programatic methods. Example:
+## API
+You can access to programatic API. Example:
 
 ```js
 var element = document.getElementById('dyframe');
+
+// Create "dyframe" object
 var dyframe = new Dyframe(element, {
   html: '<html><body>Hello, world!</body></html>'
 });
 
 setTiemout(funciton () {
+
+  // Re-render using new options
   dyframe.render({
-    html: '<html><body>Updated after 1 second!</body></html>'
+    html: '<html><body>Updated!</body></html>'
   });
+
 }, 1000);
 ```
 
-### render
+### .render()
 Usage: `.render([options])`
 
 Re-render the preview content.  
-If you set options to this method, options will be overriden and re-render with new options.
+If you set options to this method, options will be overriden and re-render.
 
 ## License
 Copyright (c) 2015 Tanjo, Hiroyuki. Licensed under the [MIT License](LICENSE).
