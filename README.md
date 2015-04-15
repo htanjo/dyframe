@@ -62,7 +62,7 @@ Default: `''`
 Profile name for device emulation.  
 If you set proper profile, the scaling of HTML will be emulated according to `<meta name="viewport">`.
 
-Supported profiles: `'smartphone'`, `'smartphoneLandscape'`, `'tablet'`, `'tabletLandscape'`
+Supported profiles: `'smartphone'`, `'tablet'`
 
 ## API
 You can access to programatic API. Example:

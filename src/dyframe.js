@@ -4,9 +4,7 @@
   // Device profiles
   var profiles = {
     tablet: 768,
-    tabletLandscape: 1024,
-    smartphone: 375,
-    smartphoneLandscape: 667
+    smartphone: 375
   };
 
   // Default viewport width
