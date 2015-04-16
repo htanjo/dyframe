@@ -11,7 +11,7 @@
 Download and include `dyframe.js` to your HTML.
 Available on [Bower](http://bower.io/) and [npm](https://www.npmjs.com/).
 
-* Download: [**dyframe.js**](dyframe.js?raw=true) / [minified](dyframe.min.js?raw=true)
+* Download: [**dyframe.js**][uncompressed-url] / [minified][minified-url]
 * Bower: `$ bower install dyframe --save`
 * npm: `$ npm install dyframe --save`
 
@@ -103,3 +103,6 @@ If you set options to this method, options will be overriden and re-render.
 
 ## License
 Copyright (c) 2015 Tanjo, Hiroyuki. Licensed under the [MIT License](LICENSE).
+
+[uncompressed-url]: https://github.com/htanjo/dyframe/raw/v0.1.0/dyframe.js
+[minified-url]: https://github.com/htanjo/dyframe/raw/v0.1.0/dyframe.min.js

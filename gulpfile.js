@@ -61,15 +61,25 @@ gulp.task('serve', function () {
   gulp.watch('src/*.js', ['jshint']);
 });
 
+gulp.task('readme', function () {
+  var downloadBase = 'https://github.com/htanjo/dyframe/raw/';
+  var pattern = new RegExp(downloadBase + '.*?[\/]', 'g');
+  var version = getJson('package.json').version;
+  var downloadDir = downloadBase + 'v' + version + '/';
+  return gulp.src('README.md')
+    .pipe($.replace(pattern, downloadDir))
+    .pipe(gulp.dest('.'));
+});
+
 gulp.task('bump', function () {
   return gulp.src(['package.json', 'bower.json'])
     .pipe($.bump({type: options.bump}))
     .pipe(gulp.dest('.'));
 });
 
-gulp.task('commit', function () {
+gulp.task('commit', ['build', 'readme'], function () {
   var version = getJson('package.json').version;
-  return gulp.src(['package.json', 'bower.json', '*.js'])
+  return gulp.src(['package.json', 'bower.json', '*.js', 'README.md'])
     .pipe($.git.commit('Release v' + version));
 });
 
@@ -83,7 +93,7 @@ gulp.task('test', ['jshint']);
 gulp.task('build', ['scripts']);
 
 gulp.task('release', function (callback) {
-  runSequence('test', 'bump', 'build', 'commit', 'tag', callback);
+  runSequence('test', 'bump', 'commit', 'tag', callback);
 });
 
 gulp.task('default', ['test']);
