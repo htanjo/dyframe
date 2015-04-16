@@ -10,35 +10,48 @@
   <body>
     <a href="https://github.com/htanjo/dyframe" class="ribbon">Fork me on GitHub</a>
     <div class="container">
-      <h1>Dyframe</h1>
+      <div class="hero">
+        <h1>Dyframe</h1>
+        <p>Dynamically render scaled HTML into iframe</p>
+        <div class="buttons">
+          <a href="https://github.com/htanjo/dyframe/raw/v0.1.0/dyframe.js" class="btn btn-lg btn-default" download>dyframe.js</a>
+          <a href="https://github.com/htanjo/dyframe/raw/v0.1.0/dyframe.min.js" class="btn btn-lg btn-default" download>dyframe.min.js</a>
+        </div>
+      </div>
       <div class="row">
         <div class="col-sm-4">
-          <h2>Basic</h2>
+          <h3>Basic</h3>
           <div class="dyframe" id="dyframe-basic"></div>
         </div>
         <div class="col-sm-4">
-          <h2>Width 1200px</h2>
+          <h3>Width 1200px</h3>
           <div class="dyframe" id="dyframe-width"></div>
         </div>
         <div class="col-sm-4">
-          <h2>Width 1600px</h2>
+          <h3>Width 1600px</h3>
           <div class="dyframe" id="dyframe-width-2"></div>
         </div>
         <div class="col-sm-4">
-          <h2>Tablet</h2>
+          <h3>Tablet</h3>
           <div class="dyframe" id="dyframe-tablet"></div>
         </div>
         <div class="col-sm-4">
-          <h2>Smartphone</h2>
+          <h3>Smartphone</h3>
           <div class="dyframe" id="dyframe-smartphone"></div>
         </div>
         <div class="col-sm-4">
-          <h2>Re-rendering</h2>
+          <h3>Re-rendering</h3>
           <div class="dyframe" id="dyframe-render"></div>
         </div>
       </div>
+      <div class="separator">
+        <div class="set-icon">
+          <span class="glyphicon glyphicon-menu-up"></span>
+          <span class="glyphicon glyphicon-menu-up"></span>
+        </div>
+      </div>
       <div class="form">
-        <h2>HTML source</h2>
+        <h3>HTML source</h3>
         <textarea class="form-control" id="input" rows="15">
 &lt;!doctype html&gt;
 &lt;html lang="en"&gt;
@@ -106,11 +119,14 @@
   &lt;/body&gt;
 &lt;/html&gt;</textarea>
       </div>
+      <div class="section">
+        <div class="h2"><a href="https://github.com/htanjo/dyframe#readme">Dyframe Documentation</a></div>
+      </div>
       <div class="footer">
-        <p class="small text-muted">Copyright &copy; 2015 Tanjo, Hiroyuki</p>
+        <p class="small">Copyright &copy; 2015 Tanjo, Hiroyuki</p>
       </div>
     </div>
-    <script src="../src/dyframe.js"></script>
+    <script src="dyframe.js"></script>
     <script src="demo.js"></script>
   </body>
 </html>
