@@ -27,6 +27,11 @@ body {
   border-radius: 3px;
 }
 
+.btn-lg {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
 .buttons .btn {
   margin-left: 2px;
   margin-right: 2px;
