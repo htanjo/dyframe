@@ -105,6 +105,22 @@ Usage: `.render([options])`
 Re-render the preview content.  
 If you set options to this method, options will be overriden and re-render.
 
+## Compatibility
+
+### Browser support
+- Internet Explorer (9+)
+- Chrome
+- Firefox
+- Safari
+- Opera (12 and current)
+- iOS Safari
+- Android Browser
+- Chrome for Android
+
+### Module interface
+- CommonJS
+- AMD
+
 ## License
 Copyright (c) 2015 Tanjo, Hiroyuki. Licensed under the [MIT License](LICENSE).
 
