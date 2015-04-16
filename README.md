@@ -1,9 +1,9 @@
 # Dyframe
 > Dynamically render scaled HTML into iframe
 
-[![Dyframe](demo/demo.png)](http://htanjo.github.io/dyframe/demo/)
+[![Dyframe](demo/demo.png)](http://htanjo.github.io/dyframe/)
 
-[**See demo**](http://htanjo.github.io/dyframe/demo/)
+[**See demo**](http://htanjo.github.io/dyframe/)
 
 ## Getting started
 ### Install
