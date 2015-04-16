@@ -61,12 +61,12 @@ gulp.task('serve', function () {
   gulp.watch('src/*.js', ['jshint']);
 });
 
-gulp.task('readme', function () {
+gulp.task('link', function () {
   var downloadBase = 'https://github.com/htanjo/dyframe/raw/';
   var pattern = new RegExp(downloadBase + '.*?[\/]', 'g');
   var version = getJson('package.json').version;
   var downloadDir = downloadBase + 'v' + version + '/';
-  return gulp.src('README.md')
+  return gulp.src(['README.md', 'demo/*.html'], {base: '.'})
     .pipe($.replace(pattern, downloadDir))
     .pipe(gulp.dest('.'));
 });
@@ -77,7 +77,7 @@ gulp.task('bump', function () {
     .pipe(gulp.dest('.'));
 });
 
-gulp.task('commit', ['build', 'readme'], function () {
+gulp.task('commit', ['build', 'link'], function () {
   var version = getJson('package.json').version;
   return gulp.src(['package.json', 'bower.json', '*.js', 'README.md'])
     .pipe($.git.commit('Release v' + version));
