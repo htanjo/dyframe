@@ -1,4 +1,4 @@
-(function () {
+(function (window, document, undefined) {
   'use strict';
 
   // Device profiles
@@ -161,12 +161,16 @@
   };
 
   // Module interface
-  if (typeof module === 'object' && typeof module.exports === 'object') {
+  if (typeof define === 'function' && define.amd) {
+    define('dyframe', [], function () {
+      return Dyframe;
+    });
+  }
+  else if (typeof module === 'object' && module.exports) {
     module.exports = Dyframe;
   }
   else {
-    var globalScope = typeof window !== 'undefined' ? window : this;
-    globalScope.Dyframe = Dyframe;
+    window.Dyframe = Dyframe;
   }
 
-}).call(this);
+}(window, document));
