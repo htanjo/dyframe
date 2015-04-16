@@ -6,7 +6,6 @@ var fs = require('fs');
 var browserSync = require('browser-sync');
 var runSequence = require('run-sequence');
 var minimist = require('minimist');
-var opn = require('opn');
 
 var getJson = function (filepath) {
   return JSON.parse(fs.readFileSync(filepath, 'utf8'));
@@ -47,12 +46,10 @@ gulp.task('scripts', function () {
 
 gulp.task('serve', function () {
   browserSync({
-    server: '.',
-    notify: false,
-    open: false
-  });
-  browserSync.emitter.once('init', function () {
-    opn('http://localhost:3000/demo/');
+    server: {
+      baseDir: ['src', 'demo'],
+    },
+    notify: false
   });
   gulp.watch([
     'demo/*',
@@ -86,6 +83,11 @@ gulp.task('commit', ['build', 'link'], function () {
 gulp.task('tag', function (callback) {
   var version = getJson('package.json').version;
   $.git.tag('v' + version, 'Release v' + version, callback);
+});
+
+gulp.task('deploy', ['test'], function () {
+  return gulp.src(['src/*.js', 'demo/**/*'])
+    .pipe($.ghPages());
 });
 
 gulp.task('test', ['jshint']);
