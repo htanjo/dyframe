@@ -42,8 +42,8 @@
       transformOrigin: '0 0'
     });
     this.wrapper.appendChild(this.viewport);
-    element.appendChild(this.wrapper);
-    this.render(options);
+    this.element.appendChild(this.wrapper);
+    this.render(options || {});
   };
 
   // Render viewport
@@ -61,14 +61,13 @@
     this.viewport.contentWindow.document.close();
   };
 
-  // Override options
+  // Init or override options
   Dyframe.prototype.updateOptions = function (options) {
     if (!this.options) {
       this.options = mergeObjects({}, defaults, options);
+      return;
     }
-    else {
-      mergeObjects(this.options, options);
-    }
+    mergeObjects(this.options, options);
   };
 
   // Scale preview accroding to options
