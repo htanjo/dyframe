@@ -96,4 +96,4 @@ gulp.task('release', function (callback) {
   runSequence('test', 'bump', 'commit', 'tag', callback);
 });
 
-gulp.task('default', ['test']);
+gulp.task('default', ['test', 'build']);
