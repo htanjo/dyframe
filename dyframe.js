@@ -5,7 +5,7 @@
  * @author Tanjo, Hiroyuki
  * @license MIT
  */
-(function () {
+(function (window, document, undefined) {
   'use strict';
 
   // Device profiles
@@ -49,8 +49,8 @@
       transformOrigin: '0 0'
     });
     this.wrapper.appendChild(this.viewport);
-    element.appendChild(this.wrapper);
-    this.render(options);
+    this.element.appendChild(this.wrapper);
+    this.render(options || {});
   };
 
   // Render viewport
@@ -68,14 +68,13 @@
     this.viewport.contentWindow.document.close();
   };
 
-  // Override options
+  // Init or override options
   Dyframe.prototype.updateOptions = function (options) {
     if (!this.options) {
       this.options = mergeObjects({}, defaults, options);
+      return;
     }
-    else {
-      mergeObjects(this.options, options);
-    }
+    mergeObjects(this.options, options);
   };
 
   // Scale preview accroding to options
@@ -169,12 +168,16 @@
   };
 
   // Module interface
-  if (typeof module === 'object' && typeof module.exports === 'object') {
+  if (typeof define === 'function' && define.amd) {
+    define('dyframe', [], function () {
+      return Dyframe;
+    });
+  }
+  else if (typeof module === 'object' && module.exports) {
     module.exports = Dyframe;
   }
   else {
-    var globalScope = typeof window !== 'undefined' ? window : this;
-    globalScope.Dyframe = Dyframe;
+    window.Dyframe = Dyframe;
   }
 
-}).call(this);
+}(window, document));
