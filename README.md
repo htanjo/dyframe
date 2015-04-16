@@ -1,6 +1,10 @@
 # Dyframe
 > Dynamically render scaled HTML into iframe.
 
+[![npm Version][npm-image]][npm-url]
+[![Bower Version][bower-image]][bower-url]
+[![Build Status][travis-image]][travis-url]
+
 [![Dyframe](demo/demo.png)](http://htanjo.github.io/dyframe/)
 
 [**See demo**](http://htanjo.github.io/dyframe/)
@@ -104,5 +108,11 @@ If you set options to this method, options will be overriden and re-render.
 ## License
 Copyright (c) 2015 Tanjo, Hiroyuki. Licensed under the [MIT License](LICENSE).
 
+[npm-image]: https://img.shields.io/npm/v/dyframe.svg
+[npm-url]: https://www.npmjs.com/package/dyframe
+[bower-image]: https://img.shields.io/bower/v/dyframe.svg
+[bower-url]: http://bower.io/
+[travis-image]: https://img.shields.io/travis/htanjo/dyframe/master.svg
+[travis-url]: https://travis-ci.org/htanjo/dyframe
 [uncompressed-url]: https://github.com/htanjo/dyframe/raw/v0.1.0/dyframe.js
 [minified-url]: https://github.com/htanjo/dyframe/raw/v0.1.0/dyframe.min.js
