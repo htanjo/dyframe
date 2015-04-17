@@ -47,29 +47,30 @@ Available on [Bower](http://bower.io/) and [npm](https://www.npmjs.com/).
 </html>
 ```
 
-## Usage
+## Constructor
 ```js
 new Dyframe(element, [options]);
 ```
 
-- `element`: Target DOM element.
-- `options`: Options for rendering the HTML content.
+- `element` : Target DOM element.
+- `options` : Options for rendering the HTML content.
 
-## Options
-### html
+### Options
+
+#### html
 Type: `String`  
 Default: `''`
 
 HTML code to render.
 
-### width
+#### width
 Type `Number`  
 Default: `980`
 
 Width (pixels) for HTML rendering.  
 If you set `profile` option, this value will be ignored. (See below)
 
-### deviceWidth
+#### deviceWidth
 Type `Number` | `null`  
 Default: `null`
 
@@ -77,27 +78,33 @@ Device width (pixels) for HTML rendering.
 If you set number to this, the HTML scaling will be emulated based on `<meta name="viewport">`.  
 If you set `profile` option, this value will be ignored. (See below)
 
-### profile
+#### profile
 Type: `String` | `null`  
 Default: `null`
 
 Profile name for device emulation.  
-If you set proper profile, the scaling will be emulated using predefined profile instead of `width` and `deviceWidth` option.
+If you set proper profile, the scaling will be emulated using profile setting instead of `width` and `deviceWidth` option.
 
-Supported profiles: `'smartphone'`, `'tablet'`
+Predefined profiles: `'smartphone'`, `'tablet'`
 
 - **smartphone:**  
   width: 980, deviceWidth: 375. Same as iPhone 6 portrait.
 - **tablet:**  
   width: 980, deviceWidth: 768. Same as iPad Air 2 portrait.
 
-## API
-You can access to programatic API. Example:
+## Methods
+You need to create "dyframe" object before using methods.
+
+```js
+var dyframe = new Dyframe(element, options);
+```
+
+### .render([options])
+Re-render the preview content.  
+If you set options to this method, the options will be overriden and re-render.
 
 ```js
 var element = document.getElementById('dyframe');
-
-// Create "dyframe" object
 var dyframe = new Dyframe(element, {
   html: '<html><body>Hello, world!</body></html>'
 });
@@ -112,11 +119,36 @@ setTiemout(funciton () {
 }, 1000);
 ```
 
-### .render()
-Usage: `.render([options])`
+## Customizing
 
-Re-render the preview content.  
-If you set options to this method, options will be overriden and re-render.
+### Dyframe.addProfile(name, profile)
+Add custom device profile to the Dyframe global config.
+
+#### name
+Type: `String`
+
+Custom profile name.
+
+#### profile
+Type: `Object`
+
+Custom profile data.
+Need to define `width` and `deviceWidth` property.
+
+```js
+// Add custom profile
+Dyframe.addProfile('nexus-6', {
+  width: 980,
+  deviceWidth: 412
+});
+
+// Use "nexus-6" profile
+new Dyframe(element, {
+  html: '<html><body>Hello, world!</body></html>',
+  profile: 'nexus-6'
+});
+
+```
 
 ## Compatibility
 
