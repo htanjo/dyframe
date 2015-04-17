@@ -49,7 +49,7 @@ Available on [Bower](http://bower.io/) and [npm](https://www.npmjs.com/).
 
 ## Usage
 ```js
-new Dyframe(element, options);
+new Dyframe(element, [options]);
 ```
 
 - `element`: Target DOM element.
@@ -64,19 +64,32 @@ HTML code to render.
 
 ### width
 Type `Number`  
-Default: `980` (px)
+Default: `980`
 
-Width for HTML preview scaling.  
-If `profile` option is specified, this value will be ignored. (See below)
+Width (pixels) for HTML rendering.  
+If you set `profile` option, this value will be ignored. (See below)
+
+### deviceWidth
+Type `Number` | `null`  
+Default: `null`
+
+Device width (pixels) for HTML rendering.  
+If you set number to this, the HTML scaling will be emulated based on `<meta name="viewport">`.  
+If you set `profile` option, this value will be ignored. (See below)
 
 ### profile
 Type: `String` | `null`  
 Default: `null`
 
 Profile name for device emulation.  
-If you set proper profile, the scaling of HTML will be emulated according to `<meta name="viewport">`.
+If you set proper profile, the scaling will be emulated using predefined profile instead of `width` and `deviceWidth` option.
 
 Supported profiles: `'smartphone'`, `'tablet'`
+
+- **smartphone:**  
+  width: 980, deviceWidth: 375. Same as iPhone 6 portrait.
+- **tablet:**  
+  width: 980, deviceWidth: 768. Same as iPad Air 2 portrait.
 
 ## API
 You can access to programatic API. Example:

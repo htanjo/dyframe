@@ -7,9 +7,9 @@
   var html = input.value;
   var dyframes = [];
 
-  // Basic
-  var basicElement = document.getElementById('dyframe-basic');
-  dyframes.push(new Dyframe(basicElement, {
+  // Base
+  var baseElement = document.getElementById('dyframe-base');
+  dyframes.push(new Dyframe(baseElement, {
     html: html
   }));
 
@@ -20,11 +20,11 @@
     width: 1200
   }));
 
-  // Width 1600px
-  var width2Element = document.getElementById('dyframe-width-2');
-  dyframes.push(new Dyframe(width2Element, {
+  // Device width 600px
+  var deviceWidthElement = document.getElementById('dyframe-device-width');
+  dyframes.push(new Dyframe(deviceWidthElement, {
     html: html,
-    width: 1600
+    deviceWidth: 600
   }));
 
   // Tablet
