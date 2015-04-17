@@ -92,6 +92,9 @@ Predefined profiles: `'smartphone'`, `'tablet'`
 - **tablet:**  
   width: 980, deviceWidth: 768. Same as iPad Air 2 portrait.
 
+**Tip:** Profiled element has additional class `df-profile-<name>`.
+It can be helpful to style with CSS.
+
 ## Methods
 You need to create "dyframe" object before using methods.
 
