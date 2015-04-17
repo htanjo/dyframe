@@ -6,6 +6,7 @@ var fs = require('fs');
 var browserSync = require('browser-sync');
 var runSequence = require('run-sequence');
 var minimist = require('minimist');
+var opn = require('opn');
 
 var getJson = function (filepath) {
   return JSON.parse(fs.readFileSync(filepath, 'utf8'));
@@ -49,7 +50,11 @@ gulp.task('serve', function () {
     server: {
       baseDir: ['src', 'demo'],
     },
-    notify: false
+    notify: false,
+    open: false
+  });
+  browserSync.emitter.once('init', function () {
+    opn('http://localhost:3000/demo.html');
   });
   gulp.watch([
     'demo/*',
@@ -63,7 +68,7 @@ gulp.task('link', function () {
   var pattern = new RegExp(downloadBase + '.*?[\/]', 'g');
   var version = getJson('package.json').version;
   var downloadDir = downloadBase + 'v' + version + '/';
-  return gulp.src(['README.md', 'demo/*.html'], {base: '.'})
+  return gulp.src(['README.md', 'demo/index.html'], {base: '.'})
     .pipe($.replace(pattern, downloadDir))
     .pipe(gulp.dest('.'));
 });
@@ -76,7 +81,7 @@ gulp.task('bump', function () {
 
 gulp.task('commit', ['build', 'link'], function () {
   var version = getJson('package.json').version;
-  return gulp.src(['package.json', 'bower.json', '*.js', 'README.md', 'demo/*.html'])
+  return gulp.src(['package.json', 'bower.json', '*.js', 'README.md', 'demo/index.html'])
     .pipe($.git.commit('Release v' + version));
 });
 
@@ -86,7 +91,7 @@ gulp.task('tag', function (callback) {
 });
 
 gulp.task('deploy', ['test'], function () {
-  return gulp.src(['src/*.js', 'demo/**/*'])
+  return gulp.src(['src/*.js', 'demo/**/*', '!demo/demo.html'])
     .pipe($.ghPages());
 });
 
