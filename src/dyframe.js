@@ -152,6 +152,16 @@
     return viewportData;
   };
 
+  // Add custom profile
+  Dyframe.addProfile = function (name, profileData) {
+    var profileDefaults = {
+      width: defaults.width,
+      deviceWidth: defaults.deviceWidth
+    };
+    var profile = mergeObjects({}, profileDefaults, profileData);
+    profiles[name] = profile;
+  };
+
   // Utility for merging objects
   var mergeObjects = function () {
     var merged = arguments[0];

@@ -3,6 +3,12 @@
 
   var Dyframe = window.Dyframe;
 
+  // Add custom profile
+  Dyframe.addProfile('custom', {
+    width: 980,
+    deviceWidth: 280
+  });
+
   var input = document.getElementById('input');
   var html = input.value;
   var dyframes = [];
@@ -18,6 +24,13 @@
   dyframes.push(new Dyframe(widthElement, {
     html: html,
     width: 1200
+  }));
+
+  // Width 1600px
+  var widthWideElement = document.getElementById('dyframe-width-wide');
+  dyframes.push(new Dyframe(widthWideElement, {
+    html: html,
+    width: 1600
   }));
 
   // Device width 600px
@@ -39,6 +52,13 @@
   dyframes.push(new Dyframe(smartphoneElement, {
     html: html,
     profile: 'smartphone'
+  }));
+
+  // Custom profile
+  var customProfileElement = document.getElementById('dyframe-custom-profile');
+  dyframes.push(new Dyframe(customProfileElement, {
+    html: html,
+    profile: 'custom'
   }));
 
   // Re-rendering
