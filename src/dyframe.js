@@ -82,13 +82,9 @@
 
   // Update class name of dyframe.element
   Dyframe.prototype.updateClass = function () {
-    removePrefixedClass(this.element, prefix + 'width-');
     removePrefixedClass(this.element, prefix + 'profile-');
     if (this.hasActiveProfile()) {
       addClass(this.element, prefix + 'profile-' + this.options.profile);
-    }
-    else {
-      addClass(this.element, prefix + 'width-' + this.options.width);
     }
   };
 
