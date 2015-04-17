@@ -10,6 +10,9 @@
   // Default viewport width
   var baseWidth = 980;
 
+  // Prefix for class names
+  var prefix = 'df-';
+
   // Default options
   var defaults = {
     html: '',
@@ -22,6 +25,7 @@
     this.element = element;
     this.wrapper = document.createElement('div');
     this.viewport = document.createElement('iframe');
+    addClass(this.element, prefix + 'element');
     setStyles(this.wrapper, {
       position: 'relative',
       display: 'block',
@@ -51,6 +55,7 @@
     if (typeof options === 'object') {
       this.updateOptions(options);
     }
+    this.updateClass();
     var innerSize = getInnerSize(this.element);
     this.width = innerSize.width;
     this.height = innerSize.height;
@@ -70,6 +75,23 @@
     mergeObjects(this.options, options);
   };
 
+  // Check if active profile is given
+  Dyframe.prototype.hasActiveProfile = function () {
+    return this.options.profile && profiles[this.options.profile];
+  };
+
+  // Update class name of dyframe.element
+  Dyframe.prototype.updateClass = function () {
+    removePrefixedClass(this.element, prefix + 'width-');
+    removePrefixedClass(this.element, prefix + 'profile-');
+    if (this.hasActiveProfile()) {
+      addClass(this.element, prefix + 'profile-' + this.options.profile);
+    }
+    else {
+      addClass(this.element, prefix + 'width-' + this.options.width);
+    }
+  };
+
   // Scale preview accroding to options
   Dyframe.prototype.scale = function () {
     var scale = this.width / this.getPreviewWidth();
@@ -84,7 +106,7 @@
 
   // Get preview HTML width
   Dyframe.prototype.getPreviewWidth = function () {
-    if (!this.options.profile || !profiles[this.options.profile]) {
+    if (!this.hasActiveProfile()) {
       return this.options.width;
     }
     var viewportData = this.getViewportData();
@@ -144,6 +166,22 @@
     for (prop in styles) {
       element.style[prop] = styles[prop];
     }
+  };
+
+  // Utility for adding class
+  var addClass = function (element, className) {
+    if (element.classList) {
+      element.classList.add(className);
+    }
+    else {
+      element.className += ' ' + className;
+    }
+  };
+
+  // Utility for removing prefixed classes (e.g. "df-profile-*")
+  var removePrefixedClass = function (element, classPrefix) {
+    var pattern = new RegExp('(^|\\s)' + classPrefix + '\\S+', 'g');
+    element.className = element.className.replace(pattern, '');
   };
 
   // Get inner width/height of element
