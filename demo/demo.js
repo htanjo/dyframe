@@ -47,17 +47,17 @@
     html: html
   });
   dyframes.push(renderDyframe);
-  var renderProfile = '';
+  var renderProfile = null;
   setInterval(function () {
     switch (renderProfile) {
-      case '':
+      case null:
         renderProfile = 'tablet';
         break;
       case 'tablet':
         renderProfile = 'smartphone';
         break;
       case 'smartphone':
-        renderProfile = '';
+        renderProfile = null;
         break;
     }
     renderDyframe.render({

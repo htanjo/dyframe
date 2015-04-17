@@ -17,7 +17,7 @@
   var defaults = {
     html: '',
     width: baseWidth,
-    profile: ''
+    profile: null
   };
 
   // Constructor

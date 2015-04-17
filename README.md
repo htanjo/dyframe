@@ -70,8 +70,8 @@ Width for HTML preview scaling.
 If `profile` option is specified, this value will be ignored. (See below)
 
 ### profile
-Type: `String`  
-Default: `''`
+Type: `String` | `null`  
+Default: `null`
 
 Profile name for device emulation.  
 If you set proper profile, the scaling of HTML will be emulated according to `<meta name="viewport">`.
