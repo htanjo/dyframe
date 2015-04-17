@@ -3,18 +3,27 @@
 
   // Device profiles
   var profiles = {
-    tablet: 768,
-    smartphone: 375
+    // iPhone 6 portrait
+    smartphone: {
+      width: 980,
+      deviceWidth: 375
+    },
+    // iPad Air 2 portrait
+    tablet: {
+      width: 980,
+      deviceWidth: 768
+    }
   };
 
-  // Default viewport width
-  var baseWidth = 980;
+  // Prefix for class names
+  var prefix = 'df-';
 
   // Default options
   var defaults = {
     html: '',
-    width: baseWidth,
-    profile: ''
+    width: 980,
+    deviceWidth: null,
+    profile: null
   };
 
   // Constructor
@@ -22,6 +31,7 @@
     this.element = element;
     this.wrapper = document.createElement('div');
     this.viewport = document.createElement('iframe');
+    addClass(this.element, prefix + 'element');
     setStyles(this.wrapper, {
       position: 'relative',
       display: 'block',
@@ -51,6 +61,7 @@
     if (typeof options === 'object') {
       this.updateOptions(options);
     }
+    this.updateClass();
     var innerSize = getInnerSize(this.element);
     this.width = innerSize.width;
     this.height = innerSize.height;
@@ -70,9 +81,22 @@
     mergeObjects(this.options, options);
   };
 
+  // Check if active profile is given
+  Dyframe.prototype.hasActiveProfile = function () {
+    return this.options.profile && profiles[this.options.profile];
+  };
+
+  // Update class name of dyframe.element
+  Dyframe.prototype.updateClass = function () {
+    removePrefixedClass(this.element, prefix + 'profile-');
+    if (this.hasActiveProfile()) {
+      addClass(this.element, prefix + 'profile-' + this.options.profile);
+    }
+  };
+
   // Scale preview accroding to options
   Dyframe.prototype.scale = function () {
-    var scale = this.width / this.getPreviewWidth();
+    var scale = this.width / this.getViewportWidth();
     setStyles(this.viewport, {
       width: (100 / scale) + '%',
       height: (100 / scale) + '%',
@@ -82,18 +106,23 @@
     });
   };
 
-  // Get preview HTML width
-  Dyframe.prototype.getPreviewWidth = function () {
-    if (!this.options.profile || !profiles[this.options.profile]) {
+  // Get width of rendering HTML
+  Dyframe.prototype.getViewportWidth = function () {
+    var hasProfile = this.hasActiveProfile();
+    if (!hasProfile && !this.options.deviceWidth) {
       return this.options.width;
     }
     var viewportData = this.getViewportData();
     var width = viewportData.width;
+    var profile = hasProfile ? profiles[this.options.profile] : {
+      width: this.options.width,
+      deviceWidth: this.options.deviceWidth
+    };
     if (!width) {
-      return baseWidth;
+      return profile.width;
     }
     if (width === 'device-width') {
-      return profiles[this.options.profile];
+      return profile.deviceWidth;
     }
     return parseInt(width, 10);
   };
@@ -123,6 +152,16 @@
     return viewportData;
   };
 
+  // Add custom profile
+  Dyframe.addProfile = function (name, profileData) {
+    var profileDefaults = {
+      width: defaults.width,
+      deviceWidth: defaults.deviceWidth
+    };
+    var profile = mergeObjects({}, profileDefaults, profileData);
+    profiles[name] = profile;
+  };
+
   // Utility for merging objects
   var mergeObjects = function () {
     var merged = arguments[0];
@@ -144,6 +183,22 @@
     for (prop in styles) {
       element.style[prop] = styles[prop];
     }
+  };
+
+  // Utility for adding class
+  var addClass = function (element, className) {
+    if (element.classList) {
+      element.classList.add(className);
+    }
+    else {
+      element.className += ' ' + className;
+    }
+  };
+
+  // Utility for removing prefixed classes (e.g. "df-profile-*")
+  var removePrefixedClass = function (element, classPrefix) {
+    var pattern = new RegExp('(^|\\s)' + classPrefix + '\\S+', 'g');
+    element.className = element.className.replace(pattern, '');
   };
 
   // Get inner width/height of element
