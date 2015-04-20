@@ -2,10 +2,25 @@
 (function () {
   'use strict';
 
-  describe('Give it some context', function () {
-    it('should run here few assertions', function () {
+  describe('Dyframe', function () {
+
+    var Dyframe = window.Dyframe;
+    var element;
+    var dyframe;
+
+    beforeEach(function () {
+      element = document.getElementById('dyframe');
+      dyframe = new Dyframe(element);
+    });
+
+    describe('constructor', function () {
+
+      it('should run here few assertions', function () {
+
+      });
 
     });
+
   });
 
 }());
