@@ -54,6 +54,7 @@
     this.wrapper.appendChild(this.viewport);
     this.element.appendChild(this.wrapper);
     this.render(options || {});
+    this.initialized = true;
   };
 
   // Render viewport
@@ -151,6 +152,17 @@
     return viewportData;
   };
 
+  // Clean up element and remove classes
+  Dyframe.prototype.destroy = function () {
+    if (!this.initialized) {
+      return;
+    }
+    removeClass(this.element, 'df-element');
+    removePrefixedClass(this.element, 'df-profile-');
+    this.element.removeChild(this.wrapper);
+    this.initialized = false;
+  };
+
   // Add custom profile
   Dyframe.addProfile = function (name, profileData) {
     var profileDefaults = {
@@ -191,6 +203,17 @@
     }
     else {
       element.className += ' ' + className;
+    }
+  };
+
+  // Utility for removing class
+  var removeClass = function (element, className) {
+    if (element.classList) {
+      element.classList.remove(className);
+    }
+    else {
+      var pattern = new RegExp('(^|\\s)' + className + '(?!\\S)', 'g');
+      element.className = element.className.replace(pattern, '');
     }
   };
 
