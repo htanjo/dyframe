@@ -12,10 +12,13 @@
 
     describe('.addProfile()', function () {
 
+      afterEach(function () {
+        dyframe.destroy();
+      });
+
       it('adds active profile for dyframe objects', function () {
         Dyframe.addProfile('custom', {});
-        element.innerHTML = '';
-        var dyframe = new Dyframe(element, {
+        dyframe = new Dyframe(element, {
           profile: 'custom'
         });
         assert(dyframe.hasActiveProfile());
@@ -25,21 +28,21 @@
 
     describe('constructor', function () {
 
-      beforeEach(function () {
-        element.innerHTML = '';
-        dyframe = new Dyframe(element, {
-          html: '<html><body>Hello, world!</body></html>'
-        });
+      afterEach(function () {
+        dyframe.destroy();
       });
 
       it('creates <div> and <iframe> in the target element', function () {
-        assert.isObject(dyframe.element);
-        assert.isNotNull(dyframe.element.querySelector('div'));
-        assert.isNotNull(dyframe.element.querySelector('iframe'));
+        dyframe = new Dyframe(element);
+        assert.isNotNull(element.querySelector('div'));
+        assert.isNotNull(element.querySelector('iframe'));
       });
 
       it('creates HTML content in <iframe>', function () {
-        var iframe = dyframe.element.querySelector('iframe');
+        dyframe = new Dyframe(element, {
+          html: '<html><body>Hello, world!</body></html>'
+        });
+        var iframe = element.querySelector('iframe');
         var body = iframe.contentWindow.document.body;
         assert.equal(body.innerHTML, 'Hello, world!');
       });
@@ -51,8 +54,8 @@
           deviceWidth: null,
           profile: null
         };
-        var dyframeWithoutOptions = new Dyframe(element);
-        assert.deepEqual(dyframeWithoutOptions.options, defaults);
+        dyframe = new Dyframe(element);
+        assert.deepEqual(dyframe.options, defaults);
       });
 
       it('overrides default options when options given', function () {
@@ -66,19 +69,20 @@
           deviceWidth: 360,
           profile: null
         };
-        var dyframeWithOptions = new Dyframe(element, options);
-        assert.deepEqual(dyframeWithOptions.options, expected);
+        dyframe = new Dyframe(element, options);
+        assert.deepEqual(dyframe.options, expected);
       });
 
       it('adds "df-element" class to the target element', function () {
-        assert(dyframe.element.classList.contains('df-element'));
+        dyframe = new Dyframe(element);
+        assert(element.classList.contains('df-element'));
       });
 
       it('adds "df-profile-<name>" class when profile option given', function () {
-        var dyframeWithProfile = new Dyframe(element, {
+        dyframe = new Dyframe(element, {
           profile: 'smartphone'
         });
-        assert(dyframeWithProfile.element.classList.contains('df-profile-smartphone'));
+        assert(element.classList.contains('df-profile-smartphone'));
       });
 
     });
@@ -88,19 +92,29 @@
   describe('dyframe', function () {
 
     beforeEach(function () {
-      element.innerHTML = '';
       dyframe = new Dyframe(element, {
         html: '<html><body>Hello, world!</body></html>'
       });
     });
 
+    afterEach(function () {
+      dyframe.destroy();
+    });
+
     describe('.render()', function () {
 
       var iframe;
+      var body;
 
       beforeEach(function () {
-        dyframe.render();
-        iframe = dyframe.element.querySelector('iframe');
+        iframe = element.querySelector('iframe');
+      });
+
+      it('overrides options when argument given', function () {
+        dyframe.render({
+          width: 1200
+        });
+        assert.equal(dyframe.options.width, 1200);
       });
 
       // Somehow this is not working on PhantomJS...
@@ -110,16 +124,17 @@
       //   assert.equal(rect.height, 200);
       // });
 
-      it('renders HTML according to width option', function () {
-        var body = iframe.contentWindow.document.body;
+      it('renders HTML according to default options', function () {
+        dyframe.render();
+        body = iframe.contentWindow.document.body;
         assert.equal(body.clientWidth, 980);
       });
 
-      it('overrides options when options argument given', function () {
+      it('renders HTML according to width option', function () {
         dyframe.render({
           width: 1200
         });
-        var body = iframe.contentWindow.document.body;
+        body = iframe.contentWindow.document.body;
         assert.equal(body.clientWidth, 1200);
       });
 
@@ -129,7 +144,7 @@
           width: 980,
           deviceWidth: 360
         });
-        var body = iframe.contentWindow.document.body;
+        body = iframe.contentWindow.document.body;
         assert.equal(body.clientWidth, 360);
       });
 
@@ -139,7 +154,7 @@
           width: 980,
           deviceWidth: 360
         });
-        var body = iframe.contentWindow.document.body;
+        body = iframe.contentWindow.document.body;
         assert.equal(body.clientWidth, 980);
       });
 
@@ -148,7 +163,7 @@
           html: '<html><head><meta name="viewport" content="width=device-width"></head></html>',
           profile: 'smartphone'
         });
-        var body = iframe.contentWindow.document.body;
+        body = iframe.contentWindow.document.body;
         assert.equal(body.clientWidth, 375);
       });
 
@@ -157,7 +172,7 @@
           html: '<html><head><meta name="viewport" content="width=device-width"></head></html>',
           profile: 'tablet'
         });
-        var body = iframe.contentWindow.document.body;
+        body = iframe.contentWindow.document.body;
         assert.equal(body.clientWidth, 768);
       });
 
@@ -170,7 +185,7 @@
           html: '<html><head><meta name="viewport" content="width=device-width"></head></html>',
           profile: 'nexus-6'
         });
-        var body = iframe.contentWindow.document.body;
+        body = iframe.contentWindow.document.body;
         assert.equal(body.clientWidth, 412);
       });
 
@@ -180,25 +195,24 @@
 
       var iframe;
 
-      beforeEach(function () {
-        dyframe.element.classList.add('non-df-class');
+      it('cleans up the target element', function () {
+        dyframe.destroy();
+        assert.equal(element.innerHTML, '');
+      });
+
+      it('removes "df" related classes', function () {
         dyframe.render({
           profile: 'smartphone'
         });
         dyframe.destroy();
-      });
-
-      it('cleans up the target element', function () {
-        assert.equal(dyframe.element.innerHTML, '');
-      });
-
-      it('removes "df" related classes', function () {
-        assert.notOk(dyframe.element.classList.contains('df-element'));
-        assert.notOk(dyframe.element.classList.contains('df-profile-smartphone'));
+        assert.notOk(element.classList.contains('df-element'));
+        assert.notOk(element.classList.contains('df-profile-smartphone'));
       });
 
       it('preserves non-"df" classes', function () {
-        assert(dyframe.element.classList.contains('non-df-class'));
+        element.classList.add('non-df-class');
+        dyframe.destroy();
+        assert(element.classList.contains('non-df-class'));
       });
 
     });

@@ -54,6 +54,7 @@
     this.wrapper.appendChild(this.viewport);
     this.element.appendChild(this.wrapper);
     this.render(options || {});
+    this.initialized = true;
   };
 
   // Render viewport
@@ -153,9 +154,13 @@
 
   // Clean up element and remove classes
   Dyframe.prototype.destroy = function () {
+    if (!this.initialized) {
+      return;
+    }
     removeClass(this.element, 'df-element');
     removePrefixedClass(this.element, 'df-profile-');
     this.element.removeChild(this.wrapper);
+    this.initialized = false;
   };
 
   // Add custom profile
