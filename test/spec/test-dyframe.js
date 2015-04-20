@@ -1,4 +1,3 @@
-/* jshint mocha: true */
 (function () {
   'use strict';
 
@@ -15,8 +14,14 @@
 
     describe('constructor', function () {
 
-      it('should run here few assertions', function () {
+      it('creates <div> and <iframe> in the target element', function () {
+        assert.isObject(dyframe.element);
+        assert.isNotNull(dyframe.element.querySelector('div'));
+        assert.isNotNull(dyframe.element.querySelector('iframe'));
+      });
 
+      it('add "df-element" class to the target element', function () {
+        assert(dyframe.element.classList.contains('df-element'));
       });
 
     });
