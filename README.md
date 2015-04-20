@@ -122,6 +122,9 @@ setTiemout(funciton () {
 }, 1000);
 ```
 
+### .destroy()
+Clean up the target element.
+
 ## Customizing
 
 ### Dyframe.addProfile(name, profile)

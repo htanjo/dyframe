@@ -176,6 +176,33 @@
 
     });
 
+    describe('.destroy()', function () {
+
+      var iframe;
+
+      beforeEach(function () {
+        dyframe.element.classList.add('non-df-class');
+        dyframe.render({
+          profile: 'smartphone'
+        });
+        dyframe.destroy();
+      });
+
+      it('cleans up the target element', function () {
+        assert.equal(dyframe.element.innerHTML, '');
+      });
+
+      it('removes "df" related classes', function () {
+        assert.notOk(dyframe.element.classList.contains('df-element'));
+        assert.notOk(dyframe.element.classList.contains('df-profile-smartphone'));
+      });
+
+      it('preserves non-"df" classes', function () {
+        assert(dyframe.element.classList.contains('non-df-class'));
+      });
+
+    });
+
   });
 
 }());
