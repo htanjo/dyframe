@@ -26,5 +26,9 @@
     "gulpfile.js",
     "src",
     "demo"
-  ]
+  ],
+  "devDependencies": {
+    "mocha": "~2.2.4",
+    "chai": "~2.2.0"
+  }
 }

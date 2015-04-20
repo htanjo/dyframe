@@ -27,12 +27,24 @@ var banner = [
   ' * @license <%= pkg.license.type %>',
   ' */',
   ''].join('\n');
+var scripts = [
+  'gulpfile.js',
+  'src/*.js',
+  'demo/*.js',
+  'test/spec/*.js'
+];
+
 
 gulp.task('jshint', function () {
-  return gulp.src(['gulpfile.js', 'src/*.js', 'demo/*.js'])
+  return gulp.src(scripts)
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'))
     .pipe($.if(!browserSync.active, $.jshint.reporter('fail')));
+});
+
+gulp.task('mocha', function () {
+  return gulp.src('test/index.html')
+    .pipe($.mochaPhantomjs());
 });
 
 gulp.task('scripts', function () {
@@ -60,7 +72,8 @@ gulp.task('serve', function () {
     'demo/*',
     'src/*.js'
   ]).on('change', browserSync.reload);
-  gulp.watch('src/*.js', ['jshint']);
+  gulp.watch(scripts, ['jshint']);
+  gulp.watch('test/spec/*.js', ['mocha']);
 });
 
 gulp.task('link', function () {
@@ -95,7 +108,7 @@ gulp.task('deploy', ['test'], function () {
     .pipe($.ghPages());
 });
 
-gulp.task('test', ['jshint']);
+gulp.task('test', ['jshint', 'mocha']);
 
 gulp.task('build', ['scripts']);
 
