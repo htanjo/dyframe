@@ -83,7 +83,7 @@
 
   // Check if active profile is given
   Dyframe.prototype.hasActiveProfile = function () {
-    return this.options.profile && profiles[this.options.profile];
+    return !!(this.options.profile && profiles[this.options.profile]);
   };
 
   // Update class name of dyframe.element
@@ -108,21 +108,20 @@
 
   // Get width of rendering HTML
   Dyframe.prototype.getViewportWidth = function () {
-    var hasProfile = this.hasActiveProfile();
-    if (!hasProfile && !this.options.deviceWidth) {
-      return this.options.width;
-    }
-    var viewportData = this.getViewportData();
-    var width = viewportData.width;
-    var profile = hasProfile ? profiles[this.options.profile] : {
+    var config = this.hasActiveProfile() ? profiles[this.options.profile] : {
       width: this.options.width,
       deviceWidth: this.options.deviceWidth
     };
+    if (!config.deviceWidth) {
+      return config.width;
+    }
+    var viewportData = this.getViewportData();
+    var width = viewportData.width;
     if (!width) {
-      return profile.width;
+      return config.width;
     }
     if (width === 'device-width') {
-      return profile.deviceWidth;
+      return config.deviceWidth;
     }
     return parseInt(width, 10);
   };
