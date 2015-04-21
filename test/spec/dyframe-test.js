@@ -2,7 +2,7 @@
   'use strict';
 
   var Dyframe = window.Dyframe;
-  var element = document.getElementById('dyframe-fixture');
+  var element = document.getElementById('dyframe');
   var dyframe;
 
   element.style.width = '100px';

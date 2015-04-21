@@ -53,19 +53,5 @@
     "opn": "^1.0.1",
     "phantomjs": "1.9.11",
     "run-sequence": "^1.0.2"
-  },
-  "testling": {
-    "html": "test/testling.html",
-    "browsers": [
-      "ie/9..latest",
-      "chrome/latest",
-      "firefox/latest",
-      "safari/latest",
-      "opera/12",
-      "opera/latest",
-      "iphone/latest",
-      "ipad/latest",
-      "android-browser/latest"
-    ]
   }
 }

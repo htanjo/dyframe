@@ -7,12 +7,14 @@
   </head>
   <body>
     <div id="mocha"></div>
-    <div id="dyframe-fixture"></div>
+    <div id="dyframe"></div>
     <script src="../node_modules/mocha/mocha.js"></script>
     <script src="../node_modules/chai/chai.js"></script>
     <script>
-      window.assert = chai.assert;
       mocha.setup('bdd');
+      var assert = chai.assert;
+      var expect = chai.expect;
+      var should = chai.should();
     </script>
     <script src="../src/dyframe.js"></script>
     <script src="spec/dyframe-test.js"></script>
