@@ -1,7 +1,4 @@
 {
   "mocha": true,
-  "expr": true,
-  "globals": {
-    "assert": false
-  }
+  "expr": true
 }
