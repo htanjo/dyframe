@@ -5,9 +5,9 @@
   var element = document.createElement('div');
   var dyframe;
 
-  document.body.appendChild(element);
   element.style.width = '100px';
   element.style.height = '200px';
+  document.body.appendChild(element);
 
   describe('Dyframe', function () {
 
@@ -22,7 +22,7 @@
         dyframe = new Dyframe(element, {
           profile: 'custom'
         });
-        assert(dyframe.hasActiveProfile());
+        expect(dyframe.hasActiveProfile()).to.be.true;
       });
 
     });
@@ -35,8 +35,8 @@
 
       it('creates <div> and <iframe> in the target element', function () {
         dyframe = new Dyframe(element);
-        assert.isNotNull(element.querySelector('div'));
-        assert.isNotNull(element.querySelector('iframe'));
+        expect(element.querySelector('div')).not.to.be.null;
+        expect(element.querySelector('iframe')).not.to.be.null;
       });
 
       it('creates HTML content in <iframe>', function () {
@@ -45,7 +45,7 @@
         });
         var iframe = element.querySelector('iframe');
         var body = iframe.contentWindow.document.body;
-        assert.equal(body.innerHTML, 'Hello, world!');
+        expect(body.innerHTML).to.equal('Hello, world!');
       });
 
       it('sets default options when no options given', function () {
@@ -56,7 +56,7 @@
           profile: null
         };
         dyframe = new Dyframe(element);
-        assert.deepEqual(dyframe.options, defaults);
+        expect(dyframe.options).to.deep.equal(defaults);
       });
 
       it('overrides default options when options given', function () {
@@ -71,19 +71,19 @@
           profile: null
         };
         dyframe = new Dyframe(element, options);
-        assert.deepEqual(dyframe.options, expected);
+        expect(dyframe.options).to.deep.equal(expected);
       });
 
       it('adds "df-element" class to the target element', function () {
         dyframe = new Dyframe(element);
-        assert(element.classList.contains('df-element'));
+        expect(element.classList.contains('df-element')).to.be.true;
       });
 
       it('adds "df-profile-<name>" class when profile option given', function () {
         dyframe = new Dyframe(element, {
           profile: 'smartphone'
         });
-        assert(element.classList.contains('df-profile-smartphone'));
+        expect(element.classList.contains('df-profile-smartphone')).to.be.true;
       });
 
     });
@@ -115,20 +115,20 @@
         dyframe.render({
           width: 1200
         });
-        assert.equal(dyframe.options.width, 1200);
+        expect(dyframe.options.width).to.equal(1200);
       });
 
       // Somehow this is not working on PhantomJS...
       // it('makes <iframe> same size with target element', function () {
       //   var rect = iframe.getBoundingClientRect();
-      //   assert.equal(rect.width, 100);
-      //   assert.equal(rect.height, 200);
+      //   expect(rect.width).to.equal(100);
+      //   expect(rect.height).to.equal(200);
       // });
 
       it('renders HTML according to default options', function () {
         dyframe.render();
         body = iframe.contentWindow.document.body;
-        assert.equal(body.clientWidth, 980);
+        expect(body.clientWidth).to.equal(980);
       });
 
       it('renders HTML according to width option', function () {
@@ -136,7 +136,7 @@
           width: 1200
         });
         body = iframe.contentWindow.document.body;
-        assert.equal(body.clientWidth, 1200);
+        expect(body.clientWidth).to.equal(1200);
       });
 
       it('renders HTML accroding to deviceWidth option if HTML has meta-viewport', function () {
@@ -146,7 +146,7 @@
           deviceWidth: 360
         });
         body = iframe.contentWindow.document.body;
-        assert.equal(body.clientWidth, 360);
+        expect(body.clientWidth).to.equal(360);
       });
 
       it('renders HTML accroding to width option if HTML does not have meta-viewport', function () {
@@ -156,7 +156,7 @@
           deviceWidth: 360
         });
         body = iframe.contentWindow.document.body;
-        assert.equal(body.clientWidth, 980);
+        expect(body.clientWidth).to.equal(980);
       });
 
       it('renders HTML accroding to "smartphone" profile', function () {
@@ -165,7 +165,7 @@
           profile: 'smartphone'
         });
         body = iframe.contentWindow.document.body;
-        assert.equal(body.clientWidth, 375);
+        expect(body.clientWidth).to.equal(375);
       });
 
       it('renders HTML accroding to "tablet" profile', function () {
@@ -174,7 +174,7 @@
           profile: 'tablet'
         });
         body = iframe.contentWindow.document.body;
-        assert.equal(body.clientWidth, 768);
+        expect(body.clientWidth).to.equal(768);
       });
 
       it('renders HTML accroding to custom profile', function () {
@@ -187,7 +187,7 @@
           profile: 'nexus-6'
         });
         body = iframe.contentWindow.document.body;
-        assert.equal(body.clientWidth, 412);
+        expect(body.clientWidth).to.equal(412);
       });
 
     });
@@ -198,7 +198,7 @@
 
       it('cleans up the target element', function () {
         dyframe.destroy();
-        assert.equal(element.innerHTML, '');
+        expect(element.innerHTML).to.be.empty;
       });
 
       it('removes "df" related classes', function () {
@@ -206,14 +206,14 @@
           profile: 'smartphone'
         });
         dyframe.destroy();
-        assert.notOk(element.classList.contains('df-element'));
-        assert.notOk(element.classList.contains('df-profile-smartphone'));
+        expect(element.classList.contains('df-element')).to.be.false;
+        expect(element.classList.contains('df-profile-smartphone')).to.be.false;
       });
 
       it('preserves non-"df" classes', function () {
         element.classList.add('non-df-class');
         dyframe.destroy();
-        assert(element.classList.contains('non-df-class'));
+        expect(element.classList.contains('non-df-class')).to.be.true;
       });
 
     });
