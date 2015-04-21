@@ -2,9 +2,10 @@
   'use strict';
 
   var Dyframe = window.Dyframe;
-  var element = document.getElementById('dyframe-fixture');
+  var element = document.createElement('div');
   var dyframe;
 
+  document.body.appendChild(element);
   element.style.width = '100px';
   element.style.height = '200px';
 
@@ -26,7 +27,7 @@
 
     });
 
-    describe('constructor', function () {
+    describe('Constructor', function () {
 
       afterEach(function () {
         dyframe.destroy();

@@ -3,6 +3,7 @@
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var fs = require('fs');
+var karma = require('karma').server;
 var browserSync = require('browser-sync');
 var runSequence = require('run-sequence');
 var minimist = require('minimist');
@@ -34,7 +35,6 @@ var scripts = [
   'test/spec/*.js'
 ];
 
-
 gulp.task('jshint', function () {
   return gulp.src(scripts)
     .pipe($.jshint())
@@ -42,9 +42,15 @@ gulp.task('jshint', function () {
     .pipe($.if(!browserSync.active, $.jshint.reporter('fail')));
 });
 
-gulp.task('mocha', function () {
-  return gulp.src('test/index.html')
-    .pipe($.mochaPhantomjs());
+gulp.task('karma', function (callback) {
+  var options = {
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  };
+  if (process.env.CI) {
+    options.browsers = ['PhantomJS'];
+  }
+  karma.start(options, callback);
 });
 
 gulp.task('scripts', function () {
@@ -68,12 +74,14 @@ gulp.task('serve', function () {
   browserSync.emitter.once('init', function () {
     opn('http://localhost:3000/demo.html');
   });
+  karma.start({
+    configFile: __dirname + '/karma.conf.js'
+  });
   gulp.watch([
     'demo/*',
     'src/*.js'
   ]).on('change', browserSync.reload);
   gulp.watch(scripts, ['jshint']);
-  gulp.watch('test/spec/*.js', ['mocha']);
 });
 
 gulp.task('link', function () {
@@ -108,7 +116,7 @@ gulp.task('deploy', ['test'], function () {
     .pipe($.ghPages());
 });
 
-gulp.task('test', ['jshint', 'mocha']);
+gulp.task('test', ['jshint', 'karma']);
 
 gulp.task('build', ['scripts']);
 
