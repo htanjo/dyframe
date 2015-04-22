@@ -31,15 +31,18 @@ module.exports = function (config) {
     customLaunchers: {
       'SL_Chrome': {
         base: 'SauceLabs',
-        browserName: 'chrome'
+        browserName: 'chrome',
+        platform: 'Windows 8.1'
       },
       'SL_Firefox': {
         base: 'SauceLabs',
-        browserName: 'firefox'
+        browserName: 'firefox',
+        platform: 'Windows 8.1'
       },
       'SL_Opera': {
         base: 'SauceLabs',
-        browserName: 'opera'
+        browserName: 'opera',
+        platform: 'Windows 7'
       },
       // 'SL_IE_9': {
       //   base: 'SauceLabs',
@@ -67,7 +70,6 @@ module.exports = function (config) {
       'SL_iOS': {
         base: 'SauceLabs',
         browserName: 'iphone',
-        platform: 'OS X 10.10',
         version: '8.2'
       },
       'SL_Android': {
