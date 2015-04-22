@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = function (config) {
   config.set({
     basePath: '',
@@ -8,14 +10,13 @@ module.exports = function (config) {
     ],
     exclude: [],
     preprocessors: {},
-    reporters: ['progress'],
+    reporters: ['mocha'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ['Chrome', 'Firefox', 'PhantomJS'],
     singleRun: false,
-    reporters: ['mocha'],
     client: {
       mocha: {
         reporter: 'html'

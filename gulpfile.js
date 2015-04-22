@@ -30,6 +30,7 @@ var banner = [
   ''].join('\n');
 var scripts = [
   'gulpfile.js',
+  'karma.conf.js',
   'src/*.js',
   'demo/*.js',
   'test/spec/*.js'
