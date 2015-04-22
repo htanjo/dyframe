@@ -6,12 +6,14 @@ module.exports = function (config) {
     basePath: '',
     frameworks: ['mocha', 'chai'],
     files: [
-      'src/dyframe.js',
+      'src/*.js',
       'test/spec/*.js'
     ],
     exclude: [],
-    preprocessors: {},
-    reporters: ['mocha'],
+    preprocessors: {
+      'src/*.js': ['coverage']
+    },
+    reporters: ['mocha', 'coverage', 'coveralls'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
@@ -22,6 +24,10 @@ module.exports = function (config) {
       mocha: {
         reporter: 'html'
       }
+    },
+    coverageReporter: {
+      type : 'lcov',
+      dir : 'coverage/'
     },
 
     // Browser test on Sauce Labs
