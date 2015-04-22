@@ -4,6 +4,7 @@
 [![Bower Version][bower-image]][bower-url]
 [![npm Version][npm-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
+[![Coverage Status][coveralls-image]][coveralls-url]
 
 [![Dyframe](demo/demo.png)](http://htanjo.github.io/dyframe/)
 
@@ -183,5 +184,7 @@ Copyright (c) 2015 Tanjo, Hiroyuki. Licensed under the [MIT License](LICENSE).
 [npm-url]: https://www.npmjs.com/package/dyframe
 [travis-image]: https://img.shields.io/travis/htanjo/dyframe/master.svg
 [travis-url]: https://travis-ci.org/htanjo/dyframe
+[coveralls-image]: https://img.shields.io/coveralls/htanjo/dyframe/master.svg
+[coveralls-url]: https://coveralls.io/r/htanjo/dyframe
 [uncompressed-url]: https://github.com/htanjo/dyframe/raw/v0.3.0/dyframe.js
 [minified-url]: https://github.com/htanjo/dyframe/raw/v0.3.0/dyframe.min.js
