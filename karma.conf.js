@@ -16,7 +16,7 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome', 'Firefox', 'PhantomJS'],
+    browsers: ['Chrome', 'Firefox', 'Opera', 'PhantomJS'],
     singleRun: true,
     client: {
       mocha: {
