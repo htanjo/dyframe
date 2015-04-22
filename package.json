@@ -54,6 +54,7 @@
     "karma-mocha": "^0.1.10",
     "karma-mocha-reporter": "^1.0.2",
     "karma-phantomjs-launcher": "^0.1.4",
+    "karma-sauce-launcher": "^0.2.10",
     "minimist": "^1.1.1",
     "mocha": "^2.2.4",
     "opn": "^1.0.1",

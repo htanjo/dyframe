@@ -44,14 +44,9 @@ gulp.task('jshint', function () {
 });
 
 gulp.task('karma', function (callback) {
-  var options = {
-    configFile: __dirname + '/karma.conf.js',
-    singleRun: true
-  };
-  if (process.env.CI) {
-    options.browsers = ['PhantomJS'];
-  }
-  karma.start(options, callback);
+  karma.start({
+    configFile: __dirname + '/karma.conf.js'
+  }, callback);
 });
 
 gulp.task('scripts', function () {
@@ -76,7 +71,8 @@ gulp.task('serve', function () {
     opn('http://localhost:3000/demo.html');
   });
   karma.start({
-    configFile: __dirname + '/karma.conf.js'
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: false
   });
   gulp.watch([
     'demo/*',
