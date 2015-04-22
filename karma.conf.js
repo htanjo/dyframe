@@ -13,7 +13,7 @@ module.exports = function (config) {
     preprocessors: {
       'src/*.js': ['coverage']
     },
-    reporters: ['mocha', 'coverage', 'coveralls'],
+    reporters: ['mocha', 'coverage'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
@@ -96,6 +96,7 @@ module.exports = function (config) {
     else {
       config.browsers = ['PhantomJS'];
     }
+    config.reporters.push('coveralls');
   }
 
 };

@@ -7,6 +7,7 @@ var karma = require('karma').server;
 var browserSync = require('browser-sync');
 var runSequence = require('run-sequence');
 var minimist = require('minimist');
+var del = require('del');
 var opn = require('opn');
 
 var getJson = function (filepath) {
@@ -36,6 +37,10 @@ var scripts = [
   'test/spec/*.js'
 ];
 
+gulp.task('clean', function (callback) {
+  del('coverage', callback);
+});
+
 gulp.task('jshint', function () {
   return gulp.src(scripts)
     .pipe($.jshint())
@@ -43,7 +48,7 @@ gulp.task('jshint', function () {
     .pipe($.if(!browserSync.active, $.jshint.reporter('fail')));
 });
 
-gulp.task('karma', function (callback) {
+gulp.task('karma', ['clean'], function (callback) {
   karma.start({
     configFile: __dirname + '/karma.conf.js'
   }, callback);
@@ -59,7 +64,7 @@ gulp.task('scripts', function () {
     .pipe(gulp.dest('.'));
 });
 
-gulp.task('serve', function () {
+gulp.task('serve', ['clean'], function () {
   browserSync({
     server: {
       baseDir: ['src', 'demo'],
