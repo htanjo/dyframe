@@ -159,14 +159,16 @@ new Dyframe(element, {
 ## Compatibility
 
 ### Browser support
+Dyframe works on most modern browsers including smart devices.  
+[Tested](https://saucelabs.com/u/dyframe) on the following browsers:
+
 - Internet Explorer (9+)
 - Chrome
 - Firefox
 - Safari
-- Opera (12 and current)
+- Opera
 - iOS Safari
 - Android Browser
-- Chrome for Android
 
 ### Module interface
 - CommonJS
