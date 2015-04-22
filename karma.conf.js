@@ -33,17 +33,47 @@ module.exports = function (config) {
         base: 'SauceLabs',
         browserName: 'chrome'
       },
+      'SL_Firefox': {
+        base: 'SauceLabs',
+        browserName: 'firefox'
+      },
+      'SL_Opera': {
+        base: 'SauceLabs',
+        browserName: 'opera'
+      },
+      // 'SL_IE_9': {
+      //   base: 'SauceLabs',
+      //   browserName: 'internet explorer',
+      //   platform: 'Windows 7',
+      //   version: '9'
+      // },
+      'SL_IE_10': {
+        base: 'SauceLabs',
+        browserName: 'internet explorer',
+        platform: 'Windows 7',
+        version: '10'
+      },
       'SL_IE_11': {
         base: 'SauceLabs',
         browserName: 'internet explorer',
         platform: 'Windows 8.1',
         version: '11'
       },
+      'SL_Safari': {
+        base: 'SauceLabs',
+        browserName: 'safari',
+        platform: 'OS X 10.10'
+      },
       'SL_iOS': {
         base: 'SauceLabs',
         browserName: 'iphone',
         platform: 'OS X 10.10',
         version: '8.2'
+      },
+      'SL_Android': {
+        base: 'SauceLabs',
+        browserName: 'android',
+        version: '4.4'
       }
     }
   });
@@ -52,7 +82,8 @@ module.exports = function (config) {
   if (process.env.CI) {
     if (process.env.SAUCE_USERNAME && process.env.SAUCE_ACCESS_KEY) {
       config.reporters.push('saucelabs');
-      config.browsers = ['SL_Chrome', 'SL_IE_11'];
+      config.browsers = Object.keys(config.customLaunchers);
+      config.captureTimeout = 0;
     }
     else {
       config.browsers = ['PhantomJS'];
