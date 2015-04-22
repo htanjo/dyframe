@@ -5,10 +5,30 @@
   var element = document.createElement('div');
   var dyframe;
 
+  // Helpers
+  var hasClass = function (element, className) {
+    if (element.classList) {
+      return element.classList.contains(className);
+    }
+    else {
+      return new RegExp('(^|\\s)' + className + '(?!\\S)', 'g').test(element.className);
+    }
+  };
+  var addClass = function (element, className) {
+    if (element.classList) {
+      element.classList.add(className);
+    }
+    else {
+      element.className += ' ' + className;
+    }
+  };
+
+  // Set up fixtures
   element.style.width = '100px';
   element.style.height = '200px';
   document.body.appendChild(element);
 
+  // Specs
   describe('Dyframe', function () {
 
     describe('.addProfile()', function () {
@@ -76,14 +96,14 @@
 
       it('adds "df-element" class to the target element', function () {
         dyframe = new Dyframe(element);
-        expect(element.classList.contains('df-element')).to.be.true;
+        expect(hasClass(element, 'df-element')).to.be.true;
       });
 
       it('adds "df-profile-<name>" class when profile option given', function () {
         dyframe = new Dyframe(element, {
           profile: 'smartphone'
         });
-        expect(element.classList.contains('df-profile-smartphone')).to.be.true;
+        expect(hasClass(element, 'df-profile-smartphone')).to.be.true;
       });
 
     });
@@ -120,64 +140,77 @@
 
       // Somehow this is not working on PhantomJS...
       // it('makes <iframe> same size with target element', function () {
+      //   dyframe.render();
       //   var rect = iframe.getBoundingClientRect();
       //   expect(rect.width).to.equal(100);
       //   expect(rect.height).to.equal(200);
       // });
 
-      it('renders HTML according to default options', function () {
+      it('renders HTML according to default options', function (done) {
         dyframe.render();
-        body = iframe.contentWindow.document.body;
-        expect(body.clientWidth).to.equal(980);
+        setTimeout(function () {
+          expect(iframe.contentWindow.innerWidth).to.equal(980);
+          done();
+        }, 0);
       });
 
-      it('renders HTML according to width option', function () {
+      it('renders HTML according to width option', function (done) {
         dyframe.render({
           width: 1200
         });
-        body = iframe.contentWindow.document.body;
-        expect(body.clientWidth).to.equal(1200);
+        setTimeout(function () {
+          expect(iframe.contentWindow.innerWidth).to.equal(1200);
+          done();
+        }, 0);
       });
 
-      it('renders HTML accroding to deviceWidth option if HTML has meta-viewport', function () {
+      it('renders HTML accroding to deviceWidth option if HTML has meta-viewport', function (done) {
         dyframe.render({
           html: '<html><head><meta name="viewport" content="width=device-width"></head></html>',
           width: 980,
           deviceWidth: 360
         });
-        body = iframe.contentWindow.document.body;
-        expect(body.clientWidth).to.equal(360);
+        setTimeout(function () {
+          expect(iframe.contentWindow.innerWidth).to.equal(360);
+          done();
+        }, 0);
       });
 
-      it('renders HTML accroding to width option if HTML does not have meta-viewport', function () {
+      it('renders HTML accroding to width option if HTML does not have meta-viewport', function (done) {
         dyframe.render({
           html: '<html><head></head></html>',
           width: 980,
           deviceWidth: 360
         });
-        body = iframe.contentWindow.document.body;
-        expect(body.clientWidth).to.equal(980);
+        setTimeout(function () {
+          expect(iframe.contentWindow.innerWidth).to.equal(980);
+          done();
+        }, 0);
       });
 
-      it('renders HTML accroding to "smartphone" profile', function () {
+      it('renders HTML accroding to "smartphone" profile', function (done) {
         dyframe.render({
           html: '<html><head><meta name="viewport" content="width=device-width"></head></html>',
           profile: 'smartphone'
         });
-        body = iframe.contentWindow.document.body;
-        expect(body.clientWidth).to.equal(375);
+        setTimeout(function () {
+          expect(iframe.contentWindow.innerWidth).to.equal(375);
+          done();
+        }, 0);
       });
 
-      it('renders HTML accroding to "tablet" profile', function () {
+      it('renders HTML accroding to "tablet" profile', function (done) {
         dyframe.render({
           html: '<html><head><meta name="viewport" content="width=device-width"></head></html>',
           profile: 'tablet'
         });
-        body = iframe.contentWindow.document.body;
-        expect(body.clientWidth).to.equal(768);
+        setTimeout(function () {
+          expect(iframe.contentWindow.innerWidth).to.equal(768);
+          done();
+        }, 0);
       });
 
-      it('renders HTML accroding to custom profile', function () {
+      it('renders HTML accroding to custom profile', function (done) {
         Dyframe.addProfile('nexus-6', {
           width: 980,
           deviceWidth: 412
@@ -186,8 +219,10 @@
           html: '<html><head><meta name="viewport" content="width=device-width"></head></html>',
           profile: 'nexus-6'
         });
-        body = iframe.contentWindow.document.body;
-        expect(body.clientWidth).to.equal(412);
+        setTimeout(function () {
+          expect(iframe.contentWindow.innerWidth).to.equal(412);
+          done();
+        }, 0);
       });
 
     });
@@ -206,14 +241,14 @@
           profile: 'smartphone'
         });
         dyframe.destroy();
-        expect(element.classList.contains('df-element')).to.be.false;
-        expect(element.classList.contains('df-profile-smartphone')).to.be.false;
+        expect(hasClass(element, 'df-element')).to.be.false;
+        expect(hasClass(element, 'df-profile-smartphone')).to.be.false;
       });
 
       it('preserves non-"df" classes', function () {
-        element.classList.add('non-df-class');
+        addClass(element, 'non-df-class');
         dyframe.destroy();
-        expect(element.classList.contains('non-df-class')).to.be.true;
+        expect(hasClass(element, 'non-df-class')).to.be.true;
       });
 
     });
