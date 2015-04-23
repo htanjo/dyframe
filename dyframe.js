@@ -118,13 +118,17 @@
     }
     var viewportData = this.getViewportData();
     var width = viewportData.width;
-    if (!width) {
-      return config.width;
+    var initialScale = viewportData['initial-scale'];
+    if (width) {
+      if (width === 'device-width') {
+        return config.deviceWidth;
+      }
+      return parseInt(width, 10);
     }
-    if (width === 'device-width') {
-      return config.deviceWidth;
+    if (initialScale && initialScale > 0) {
+      return Math.floor(config.deviceWidth / parseFloat(initialScale));
     }
-    return parseInt(width, 10);
+    return config.width;
   };
 
   // Get viewport content as object
