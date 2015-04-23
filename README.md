@@ -66,16 +66,16 @@ HTML code to render.
 
 #### width
 Type `Number`  
-Default: `980`
+Default: `980` (px)
 
-Width (pixels) for HTML rendering.  
+Width for HTML rendering.  
 If you set `profile` option, this value will be ignored. (See below)
 
 #### deviceWidth
 Type `Number` | `null`  
-Default: `null`
+Default: `null` (px)
 
-Device width (pixels) for HTML rendering.  
+Device width for HTML rendering.  
 If you set number to this, the HTML scaling will be emulated based on `<meta name="viewport">`.  
 If you set `profile` option, this value will be ignored. (See below)
 
@@ -95,6 +95,15 @@ Predefined profiles: `'smartphone'`, `'tablet'`
 
 **Tip:** Profiled element has additional class `df-profile-<name>`.
 It can be helpful to style with CSS.
+
+#### interval
+Type: `Number`  
+Default: `0` (ms)
+
+Interval to skip rendering.  
+Frequent re-rendering could put heavy load on CPU.
+If you set `500` to this option, the actual DOM rendering takes place only once in 500 ms.
+This affects on `.render()` method.
 
 ## Methods
 You need to create "dyframe" object before using methods.

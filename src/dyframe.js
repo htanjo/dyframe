@@ -23,7 +23,8 @@
     html: '',
     width: 980,
     deviceWidth: null,
-    profile: null
+    profile: null,
+    interval: 0
   };
 
   // Constructor
@@ -31,6 +32,10 @@
     this.element = element;
     this.wrapper = document.createElement('div');
     this.viewport = document.createElement('iframe');
+    this.width = 0;
+    this.height = 0;
+    this.queued = false;
+    this.waiting = false;
     addClass(this.element, prefix + 'element');
     setStyles(this.wrapper, {
       position: 'relative',
@@ -62,6 +67,16 @@
     if (typeof options === 'object') {
       this.updateOptions(options);
     }
+    if (this.waiting) {
+      this.queued = true;
+      return;
+    }
+    this.renderDom();
+  };
+
+  // Actually update DOM
+  Dyframe.prototype.renderDom = function () {
+    var self = this;
     this.updateClass();
     var innerSize = getInnerSize(this.element);
     this.width = innerSize.width;
@@ -71,6 +86,16 @@
     this.viewport.contentWindow.document.open();
     this.viewport.contentWindow.document.write(this.options.html);
     this.viewport.contentWindow.document.close();
+    this.queued = false;
+    if (this.options.interval > 0) {
+      this.waiting = true;
+      setTimeout(function () {
+        self.waiting = false;
+        if (self.queued) {
+          self.renderDom();
+        }
+      }, this.options.interval);
+    }
   };
 
   // Init or override options

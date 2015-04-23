@@ -73,7 +73,8 @@
           html: '',
           width: 980,
           deviceWidth: null,
-          profile: null
+          profile: null,
+          interval: 0
         };
         dyframe = new Dyframe(element);
         expect(dyframe.options).to.deep.equal(defaults);
@@ -88,7 +89,8 @@
           html: '<html><body>Hello, Dyframe!</body></html>',
           width: 980,
           deviceWidth: 360,
-          profile: null
+          profile: null,
+          interval: 0
         };
         dyframe = new Dyframe(element, options);
         expect(dyframe.options).to.deep.equal(expected);
@@ -267,6 +269,29 @@
         setTimeout(function () {
           expect(iframe.contentWindow.innerWidth).to.equal(412);
           done();
+        }, 0);
+      });
+
+      it('skips and postpones rendering when interval option given', function (done) {
+        dyframe.render({
+          html: '<html><body>First rendering</body></html>',
+          interval: 1000
+        });
+        setTimeout(function () {
+          body = iframe.contentWindow.document.body;
+          expect(body.innerHTML).to.equal('First rendering');
+          dyframe.render({
+            html: '<html><body>Second rendering</body></html>'
+          });
+          setTimeout(function () {
+            body = iframe.contentWindow.document.body;
+            expect(body.innerHTML).to.equal('First rendering');
+            setTimeout(function () {
+              body = iframe.contentWindow.document.body;
+              expect(body.innerHTML).to.equal('Second rendering');
+              done();
+            }, 1000);
+          }, 0);
         }, 0);
       });
 
