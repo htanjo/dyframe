@@ -297,6 +297,7 @@
       it('preserves non-"df" classes', function () {
         addClass(element, 'non-df-class');
         dyframe.destroy();
+        expect(hasClass(element, 'df-element')).to.be.false;
         expect(hasClass(element, 'non-df-class')).to.be.true;
       });
 
