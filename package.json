@@ -1,6 +1,6 @@
 {
   "name": "dyframe",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Dynamically render scaled HTML into iframe.",
   "author": "Tanjo, Hiroyuki",
   "license": {
