@@ -17,7 +17,8 @@
   var baseElement = document.getElementById('dyframe-base');
   if (baseElement) {
     dyframes.push(new Dyframe(baseElement, {
-      html: html
+      html: html,
+      interval: 500
     }));
   }
 
@@ -26,7 +27,8 @@
   if (widthElement) {
     dyframes.push(new Dyframe(widthElement, {
       html: html,
-      width: 1200
+      width: 1200,
+      interval: 500
     }));
   }
 
@@ -35,7 +37,8 @@
   if (deviceWidthElement) {
     dyframes.push(new Dyframe(deviceWidthElement, {
       html: html,
-      deviceWidth: 600
+      deviceWidth: 600,
+      interval: 500
     }));
   }
 
@@ -44,7 +47,8 @@
   if (tabletElement) {
     dyframes.push(new Dyframe(tabletElement, {
       html: html,
-      profile: 'tablet'
+      profile: 'tablet',
+      interval: 500
     }));
   }
 
@@ -53,7 +57,8 @@
   if (smartphoneElement) {
     dyframes.push(new Dyframe(smartphoneElement, {
       html: html,
-      profile: 'smartphone'
+      profile: 'smartphone',
+      interval: 500
     }));
   }
 
@@ -62,7 +67,8 @@
   if (customProfileElement) {
     dyframes.push(new Dyframe(customProfileElement, {
       html: html,
-      profile: 'custom'
+      profile: 'custom',
+      interval: 500
     }));
   }
 
@@ -70,7 +76,8 @@
   var renderElement = document.getElementById('dyframe-render');
   if (renderElement) {
     var renderDyframe = new Dyframe(renderElement, {
-      html: html
+      html: html,
+      interval: 500
     });
     dyframes.push(renderDyframe);
     var renderProfile = null;
@@ -94,23 +101,23 @@
 
   // Sync HTML content with textarea value
   var updateHtml = function () {
+    html = input.value;
     dyframes.forEach(function (dyframe) {
       dyframe.render({
-        html: input.value
+        html: html
       });
     });
   };
-  var timer;
   input.addEventListener('change', function () {
     updateHtml();
   });
-  input.addEventListener('keyup', function () {
-    if (timer) {
-      clearTimeout(timer);
-    }
-    timer = setTimeout(function () {
+  input.addEventListener('keydown', function () {
+    setTimeout(function () {
+      if (input.value === html) {
+        return;
+      }
       updateHtml();
-    }, 500);
+    }, 0);
   });
 
 }).call(this);
