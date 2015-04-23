@@ -197,6 +197,18 @@
         }, 0);
       });
 
+      it('renders HTML accroding to initial-scale value in meta-viewport', function (done) {
+        dyframe.render({
+          html: '<html><head><meta name="viewport" content="initial-scale=0.5"></head></html>',
+          width: 980,
+          deviceWidth: 360
+        });
+        setTimeout(function () {
+          expect(iframe.contentWindow.innerWidth).to.equal(720);
+          done();
+        }, 0);
+      });
+
       it('renders HTML ignoring meta-viewport that does not have content', function (done) {
         dyframe.render({
           html: '<html><head><meta name="viewport"></head></html>',
