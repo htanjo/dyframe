@@ -112,23 +112,20 @@
 
   describe('dyframe', function () {
 
-    beforeEach(function () {
-      dyframe = new Dyframe(element, {
-        html: '<html><body>Hello, world!</body></html>'
-      });
-    });
-
-    afterEach(function () {
-      dyframe.destroy();
-    });
-
     describe('.render()', function () {
 
       var iframe;
       var body;
 
       beforeEach(function () {
+        dyframe = new Dyframe(element, {
+          html: '<html><body>Hello, world!</body></html>'
+        });
         iframe = element.querySelector('iframe');
+      });
+
+      afterEach(function () {
+        dyframe.destroy();
       });
 
       it('overrides options when argument given', function () {
@@ -188,6 +185,42 @@
         }, 0);
       });
 
+      it('renders HTML accroding to width value in meta-viewport', function (done) {
+        dyframe.render({
+          html: '<html><head><meta name="viewport" content="width=720"></head></html>',
+          width: 980,
+          deviceWidth: 360
+        });
+        setTimeout(function () {
+          expect(iframe.contentWindow.innerWidth).to.equal(720);
+          done();
+        }, 0);
+      });
+
+      it('renders HTML ignoring meta-viewport that does not have content', function (done) {
+        dyframe.render({
+          html: '<html><head><meta name="viewport"></head></html>',
+          width: 980,
+          deviceWidth: 360
+        });
+        setTimeout(function () {
+          expect(iframe.contentWindow.innerWidth).to.equal(980);
+          done();
+        }, 0);
+      });
+
+      it('renders HTML ignoring meta-viewport that has invalid content', function (done) {
+        dyframe.render({
+          html: '<html><head><meta name="viewport" content="width:device-width"></head></html>',
+          width: 980,
+          deviceWidth: 360
+        });
+        setTimeout(function () {
+          expect(iframe.contentWindow.innerWidth).to.equal(980);
+          done();
+        }, 0);
+      });
+
       it('renders HTML accroding to "smartphone" profile', function (done) {
         dyframe.render({
           html: '<html><head><meta name="viewport" content="width=device-width"></head></html>',
@@ -229,7 +262,11 @@
 
     describe('.destroy()', function () {
 
-      var iframe;
+      beforeEach(function () {
+        dyframe = new Dyframe(element, {
+          html: '<html><body>Hello, world!</body></html>'
+        });
+      });
 
       it('cleans up the target element', function () {
         dyframe.destroy();
