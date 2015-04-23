@@ -288,6 +288,13 @@
         expect(hasClass(element, 'non-df-class')).to.be.true;
       });
 
+      it('can be called twice, but does nothing', function () {
+        dyframe.destroy();
+        expect(element.innerHTML).to.be.empty;
+        expect(function () {dyframe.destroy();}).to.not.throw(Error);
+        expect(element.innerHTML).to.be.empty;
+      });
+
     });
 
   });
