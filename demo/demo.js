@@ -134,4 +134,9 @@
     }, 0);
   });
 
+  // Hotfix for image rendering
+  setTimeout(function () {
+    updateHtml();
+  }, 1000);
+
 }).call(this);
