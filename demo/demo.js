@@ -4,6 +4,10 @@
   var Dyframe = window.Dyframe;
 
   // Add custom profile
+  Dyframe.addProfile('pc', {
+    width: 1366,
+    deviceWidth: null
+  });
   Dyframe.addProfile('custom', {
     width: 980,
     deviceWidth: 280
@@ -38,6 +42,16 @@
     dyframes.push(new Dyframe(deviceWidthElement, {
       html: html,
       deviceWidth: 600,
+      interval: 500
+    }));
+  }
+
+  // PC
+  var pcElement = document.getElementById('dyframe-pc');
+  if (pcElement) {
+    dyframes.push(new Dyframe(pcElement, {
+      html: html,
+      profile: 'pc',
       interval: 500
     }));
   }

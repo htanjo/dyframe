@@ -3,14 +3,13 @@
   <head>
     <meta charset="utf-8">
     <title>Dyframe</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Dynamically render scaled HTML into iframe.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="demo.css">
   </head>
   <body>
     <a href="https://github.com/htanjo/dyframe" class="ribbon">Fork me on GitHub</a>
-    <div class="container">
+    <div class="container home">
       <div class="hero">
         <h1>Dyframe</h1>
         <p>Dynamically render scaled HTML into iframe.</p>
@@ -19,31 +18,10 @@
           <a href="https://github.com/htanjo/dyframe/raw/v0.4.0/dyframe.min.js" class="btn btn-lg btn-default" download>dyframe.min.js</a>
         </div>
       </div>
-      <div class="row">
-        <div class="col-sm-4 example">
-          <h3>Base</h3>
-          <div class="dyframe" id="dyframe-base"></div>
-        </div>
-        <div class="col-sm-4 example">
-          <h3>Width 1200px</h3>
-          <div class="dyframe" id="dyframe-width"></div>
-        </div>
-        <div class="col-sm-4 example">
-          <h3>Device width 600px</h3>
-          <div class="dyframe" id="dyframe-device-width"></div>
-        </div>
-        <div class="col-sm-4 example">
-          <h3>Tablet</h3>
-          <div class="dyframe" id="dyframe-tablet"></div>
-        </div>
-        <div class="col-sm-4 example">
-          <h3>Smartphone</h3>
-          <div class="dyframe" id="dyframe-smartphone"></div>
-        </div>
-        <div class="col-sm-4 example">
-          <h3>Re-rendering</h3>
-          <div class="dyframe" id="dyframe-render"></div>
-        </div>
+      <div class="devices">
+        <div class="device device-pc" id="dyframe-pc"></div>
+        <div class="device device-tablet" id="dyframe-tablet"></div>
+        <div class="device device-smartphone" id="dyframe-smartphone"></div>
       </div>
       <div class="separator">
         <div class="set-icon">
@@ -93,22 +71,22 @@
       &lt;/nav&gt;
       &lt;h1 class="text-center"&gt;Welcome to Awesome Site!&lt;/h1&gt;
       &lt;p class="text-center"&gt;
-        &lt;img src="http://lorempixel.com/240/240/city/4" alt="" width="240" height="240" class="img-circle"&gt;
+        &lt;img src="kitten.jpg" alt="" width="240" height="240" class="img-circle"&gt;
       &lt;/p&gt;
       &lt;h2&gt;About&lt;/h2&gt;
       &lt;p class="lead"&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nibh augue, fermentum condimentum lobortis ac, mollis ut odio. Mauris dignissim nec ligula sit amet hendrerit. Morbi sed massa non nisl lacinia pharetra vitae non felis. Integer pulvinar ornare odio, non facilisis est interdum id.&lt;/p&gt;
       &lt;h2&gt;Friends&lt;/h2&gt;
       &lt;div class="row"&gt;
         &lt;div class="col-sm-4"&gt;
-          &lt;h3&gt;Giggles&lt;/h3&gt;
+          &lt;h3&gt;Tom&lt;/h3&gt;
           &lt;p&gt;Interdum et malesuada fames ac ante ipsum primis in faucibus. Nullam commodo maximus lectus ac cursus. Donec malesuada tortor nibh, vel imperdiet purus facilisis ut. Praesent vulputate quam sed metus maximus mattis.&lt;/p&gt;
         &lt;/div&gt;
         &lt;div class="col-sm-4"&gt;
-          &lt;h3&gt;Lumpy&lt;/h3&gt;
+          &lt;h3&gt;Jerry&lt;/h3&gt;
           &lt;p&gt;Duis diam nisl, viverra id sagittis sed, ultricies in lorem. Cras tellus tellus, sagittis non commodo sit amet, sagittis id dolor. Aliquam non blandit enim, nec interdum est.&lt;/p&gt;
         &lt;/div&gt;
         &lt;div class="col-sm-4"&gt;
-          &lt;h3&gt;Sniffles&lt;/h3&gt;
+          &lt;h3&gt;Spike&lt;/h3&gt;
           &lt;p&gt;Nulla vehicula, metus quis malesuada cursus, velit quam aliquam eros, ac pulvinar turpis velit quis nisi. Cras non volutpat lectus. Nam ut lacus luctus, tempor lectus vel, blandit ex. Aliquam vitae nibh mi.&lt;/p&gt;
         &lt;/div&gt;
       &lt;/div&gt;
