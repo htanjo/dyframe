@@ -1,5 +1,5 @@
 # Dyframe
-> Dynamically render scaled HTML into iframe.
+> Dynamically render responsive HTML into iframe.
 
 [![Bower Version][bower-image]][bower-url]
 [![npm Version][npm-image]][npm-url]
