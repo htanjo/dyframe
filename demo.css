@@ -4,9 +4,13 @@ body {
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+.home {
+  width: 970px;
+}
+
 .hero {
-  margin-top: 80px;
-  margin-bottom: 80px;
+  margin-top: 60px;
+  margin-bottom: 60px;
   text-align: center;
 }
 
@@ -52,6 +56,47 @@ h3 {
 
 .example {
   margin-bottom: 40px;
+}
+
+.devices {
+  position: relative;
+  width: 940px;
+  height: 545px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.device {
+  position: absolute;
+  overflow: hidden;
+}
+
+.device-pc {
+  top: 0;
+  left: 0;
+  width: 940px;
+  height: 533px;
+  padding: 35px 168px 120px;
+  background-image: url(pc.png);
+  background-repeat: no-repeat;
+}
+.device-tablet {
+  right: 40px;
+  bottom: 0;
+  width: 340px;
+  height: 482px;
+  padding: 45px 23px;
+  background-image: url(tablet.png);
+  background-repeat: no-repeat;
+}
+.device-smartphone {
+  left: 90px;
+  bottom: 0;
+  width: 150px;
+  height: 300px;
+  padding: 35px 10px 36px;
+  background-image: url(smartphone.png);
+  background-repeat: no-repeat;
 }
 
 .dyframe {
