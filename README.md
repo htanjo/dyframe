@@ -54,7 +54,7 @@ new Dyframe(element, [options]);
 ```
 
 - `element` : Target DOM element.
-- `options` : Options for rendering the HTML content.
+- `options` : Options for rendering HTML content.
 
 ### Options
 
@@ -62,31 +62,32 @@ new Dyframe(element, [options]);
 Type: `String`  
 Default: `''`
 
-HTML code to render.
+HTML to render.  
+Set whole HTML code including `doctype`, `<html>`, `<head>` and `<body>` tag.
 
 #### width
 Type `Number`  
 Default: `980` (px)
 
 Width for HTML rendering.  
-If you set `profile` option, this value will be ignored. (See below)
+But if you have `profile` option, `width` value will be ignored. (See below)
 
 #### deviceWidth
 Type `Number` | `null`  
 Default: `null` (px)
 
 Device width for HTML rendering.  
-If you set number to this, the HTML scaling will be emulated based on `<meta name="viewport">`.  
-If you set `profile` option, this value will be ignored. (See below)
+The HTML scaling can be emulated based on `<meta name="viewport">` when you set number.  
+But if you have `profile` option, `deviceWidth` value will be ignored. (See below)
 
 #### profile
 Type: `String` | `null`  
 Default: `null`
 
 Profile name for device emulation.  
-If you set proper profile, the scaling will be emulated using profile setting instead of `width` and `deviceWidth` option.
+When you set proper profile, the scaling will be emulated using profile setting instead of `width` and `deviceWidth` option.
 
-Predefined profiles: `'smartphone'`, `'tablet'`
+You can use the following profiles, or create custom profile using `Dyframe.addProfile()`.
 
 - **smartphone:**  
   width: 980, deviceWidth: 375. Same as iPhone 6 portrait.
@@ -94,19 +95,20 @@ Predefined profiles: `'smartphone'`, `'tablet'`
   width: 980, deviceWidth: 768. Same as iPad Air 2 portrait.
 
 **Tip:** Profiled element has additional class `df-profile-<name>`.
-It can be helpful to style with CSS.
+It can be helpful for styling with CSS.
 
 #### interval
 Type: `Number`  
 Default: `0` (ms)
 
 Interval to skip rendering.  
-Frequent re-rendering could put heavy load on CPU.
-If you set `500` to this option, the actual DOM rendering takes place only once in 500 ms.
-This affects on `.render()` method.
+Frequent re-rendering, such as [live HTML preview](http://htanjo.github.io/dyframe/), could put heavy load on CPU.
+To prevent that, you can limit the frequency using this option.
+
+When you set `500` to this option, the actual DOM rendering takes place only once in 500 ms even if `.render()` method called many times.
 
 ## Methods
-You need to create "dyframe" object before using methods.
+Create "dyframe" object before using methods.
 
 ```js
 var dyframe = new Dyframe(element, options);
@@ -114,7 +116,7 @@ var dyframe = new Dyframe(element, options);
 
 ### .render([options])
 Re-render the preview content.  
-If you set options to this method, the options will be overriden and re-render.
+If you call this method with argument, the options will be overriden and re-render.
 
 ```js
 var element = document.getElementById('dyframe');
@@ -124,7 +126,7 @@ var dyframe = new Dyframe(element, {
 
 setTiemout(funciton () {
 
-  // Re-render using new options
+  // Update HTML content
   dyframe.render({
     html: '<html><body>Updated!</body></html>'
   });
@@ -158,7 +160,7 @@ Dyframe.addProfile('nexus-6', {
   deviceWidth: 412
 });
 
-// Use "nexus-6" profile
+// Render using "nexus-6" profile
 new Dyframe(element, {
   html: '<html><body>Hello, world!</body></html>',
   profile: 'nexus-6'
