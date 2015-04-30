@@ -1,3 +1,5 @@
+/* jshint mocha: true, expr: true */
+/* global expect */
 (function () {
   'use strict';
 
