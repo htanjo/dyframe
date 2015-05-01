@@ -1,10 +1,10 @@
 language: node_js
 sudo: false
 node_js:
-  - "0.12"
+- '0.12'
 env:
   global:
-    - BS_AUTOMATE_PROJECT="$TRAVIS_REPO_SLUG"
-    - BS_AUTOMATE_BUILD="Travis build No. $TRAVIS_BUILD_NUMBER for $TRAVIS_REPO_SLUG"
-    - secure: "PcVAVdrUj1z7fztYklzExbkxCkwEgdKaaSt4eQNNuxdBvj8MwDAp7JvKasqAALBLJgcthj+jt+BU2l3LABPZyZPkl6A6FstoXvmK0fUAPr2k9InuiFX6UgybNKvhIQOyF++9bw0kCTZlkGn3KSw0vLZAx10/+XCb8mu7ghwylrI="
-    - secure: "IO5ls6xcCpbgxEJFpKJhh5WT1FxwZOiwdhXs2OMElPCDAoMrQcooClvlSG6MWAY344F9p6jS3JFy0m8AZWw9IuJr5HeS36o5HS1Zf1+A/Awe8BDkyfHZTORZPU6VucFfLmZxgDXSFAmKxTaXUPhPQGXGbXuvT8KdkbqT43eA2HI="
+  - BS_AUTOMATE_PROJECT="$TRAVIS_REPO_SLUG"
+  - BS_AUTOMATE_BUILD="Travis build No. $TRAVIS_BUILD_NUMBER for $TRAVIS_REPO_SLUG"
+  - secure: qkWX5gf0X+gtcshX4U5OBdozj/q8TjPcE8IArromTei+uzpzKwYsgNORLdSvp8pQCWGUUIiFeOATZdGCRktyf+h3UgbqkvsLsH2sREhYhcKJ+Ub9eQfNdd/OioJszA+Jm0FRPw+GWRQW/aftSVk8AZYgKzA9Cj3xR+RkaXrr7ic=
+  - secure: QVJAPe19yXtAoQB3q+9GSTifw8qV63RDyXiILCtVLKy3e8MHMwuQszIk/2nnjn61WL3Gat+Ch1X9NOUw++TwrEl/VlIyR9J8P4e87sCegOoZygSN98VZwB+7r/WNm1ChpmYOMya6WrDHNKFGxRPc4Q/z2QB86eqbBqf54xG4k/8=
