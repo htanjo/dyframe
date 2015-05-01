@@ -95,7 +95,7 @@ module.exports = function (config) {
 
   // Override concfig for CI environment
   if (process.env.CI) {
-    if (process.env.BS_USERNAME && process.env.BS_AUTHKEY) {
+    if (process.env.BROWSER_STACK_USERNAME && process.env.BROWSER_STACK_ACCESS_KEY) {
       config.browsers = Object.keys(config.customLaunchers);
       config.captureTimeout = 0;
     }
