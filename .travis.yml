@@ -4,5 +4,7 @@ node_js:
   - "0.12"
 env:
   global:
-    - secure: U4CyMK+05vj8bJNu9SnF4+HPRRAcvmsjq/sdvxJFJdtt15KMyDdcxFZW5VaBn5Ll87TtaMJb/SyI3Z+VcxOdIqwsDJNKETROkvr+/onhQuKtAEXFFqUjseoPrIvijXs1zUQzJ0bZqnEKWjOpCxht1C3liWasPhA+NfdQFwMhkrk=
-    - secure: PthUvoUKmz6Oh1fyWNwLNQyvPyMOC4bvn9AwaUNQX71OOatxy6ZDpukKt6ujR5aj6Mbm/3IZuoWTgfPGDTbXCUWj93cUG/RrPiNjAw8F41m5krQa/qU9SjBTswNFgZMKk6JTo2L4BA1YMPim8i/ALteFPc1LpdDqJ/3uKm33OLs=
+    - BS_AUTOMATE_PROJECT="$TRAVIS_REPO_SLUG"
+    - BS_AUTOMATE_BUILD="Travis build No. $TRAVIS_BUILD_NUMBER for $TRAVIS_REPO_SLUG"
+    - secure: "PcVAVdrUj1z7fztYklzExbkxCkwEgdKaaSt4eQNNuxdBvj8MwDAp7JvKasqAALBLJgcthj+jt+BU2l3LABPZyZPkl6A6FstoXvmK0fUAPr2k9InuiFX6UgybNKvhIQOyF++9bw0kCTZlkGn3KSw0vLZAx10/+XCb8mu7ghwylrI="
+    - secure: "IO5ls6xcCpbgxEJFpKJhh5WT1FxwZOiwdhXs2OMElPCDAoMrQcooClvlSG6MWAY344F9p6jS3JFy0m8AZWw9IuJr5HeS36o5HS1Zf1+A/Awe8BDkyfHZTORZPU6VucFfLmZxgDXSFAmKxTaXUPhPQGXGbXuvT8KdkbqT43eA2HI="

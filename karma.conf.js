@@ -1,3 +1,4 @@
+/* jshint camelcase: false */
 'use strict';
 
 module.exports = function (config) {
@@ -31,65 +32,70 @@ module.exports = function (config) {
     },
 
     // Browser test on Sauce Labs
-    sauceLabs: {
-      testName: 'Dyframe Tests'
-    },
     customLaunchers: {
-      'SL_Chrome': {
-        base: 'SauceLabs',
-        browserName: 'chrome',
-        platform: 'Windows 8.1'
+      'BS_Chrome': {
+        base: 'BrowserStack',
+        browser: 'chrome',
+        os: 'Windows',
+        os_version: '8.1'
       },
-      'SL_Firefox': {
-        base: 'SauceLabs',
-        browserName: 'firefox',
-        platform: 'Windows 8.1'
+      'BS_Firefox': {
+        base: 'BrowserStack',
+        browser: 'firefox',
+        os: 'Windows',
+        os_version: '8.1'
       },
-      'SL_Opera': {
-        base: 'SauceLabs',
-        browserName: 'opera',
-        platform: 'Windows 7'
+      'BS_Opera': {
+        base: 'BrowserStack',
+        browser: 'opera',
+        os: 'Windows',
+        os_version: '8.1'
       },
-      'SL_IE_11': {
-        base: 'SauceLabs',
-        browserName: 'internet explorer',
-        platform: 'Windows 8.1',
-        version: '11'
+      'BS_IE_11': {
+        base: 'BrowserStack',
+        browser: 'ie',
+        browser_version: '11.0',
+        os: 'Windows',
+        os_version: '8.1'
       },
-      'SL_IE_10': {
-        base: 'SauceLabs',
-        browserName: 'internet explorer',
-        platform: 'Windows 7',
-        version: '10'
+      'BS_IE_10': {
+        base: 'BrowserStack',
+        browser: 'ie',
+        browser_version: '10.0',
+        os: 'Windows',
+        os_version: '7'
       },
-      'SL_IE_9': {
-        base: 'SauceLabs',
-        browserName: 'internet explorer',
-        platform: 'Windows 7',
-        version: '9'
+      'BS_IE_9': {
+        base: 'BrowserStack',
+        browser: 'ie',
+        browser_version: '9.0',
+        os: 'Windows',
+        os_version: '7'
       },
-      'SL_Safari': {
-        base: 'SauceLabs',
-        browserName: 'safari',
-        platform: 'OS X 10.10'
+      'BS_Safari': {
+        base: 'BrowserStack',
+        browser: 'safari',
+        os: 'OS X',
+        os_version: 'Yosemite'
       },
-      'SL_iOS': {
-        base: 'SauceLabs',
-        browserName: 'iphone',
-        version: '8.2'
+      'BS_iOS': {
+        base: 'BrowserStack',
+        device: 'iPhone 5S',
+        os: 'ios',
+        os_version: '7.0'
       },
-      'SL_Android': {
-        base: 'SauceLabs',
-        browserName: 'android',
-        version: '4.4'
+      'BS_Android': {
+        base: 'BrowserStack',
+        device: 'Samsung Galaxy S5',
+        os: 'android',
+        os_version: '4.4'
       }
     }
   });
 
   // Override concfig for CI environment
   if (process.env.CI) {
-    if (process.env.SAUCE_USERNAME && process.env.SAUCE_ACCESS_KEY) {
-      config.reporters.push('saucelabs');
+    if (process.env.BROWSER_STACK_USERNAME && process.env.BROWSER_STACK_ACCESS_KEY) {
       config.browsers = Object.keys(config.customLaunchers);
       config.captureTimeout = 0;
     }

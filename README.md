@@ -172,7 +172,7 @@ new Dyframe(element, {
 
 ### Browser support
 Dyframe works on most modern browsers including smart devices.  
-[Tested](https://saucelabs.com/u/dyframe) on the following browsers:
+Tested on the following browsers powered by [BrowserStack](https://www.browserstack.com/).
 
 - Internet Explorer (9+)
 - Chrome
