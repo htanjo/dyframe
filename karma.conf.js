@@ -95,13 +95,8 @@ module.exports = function (config) {
 
   // Override concfig for CI environment
   if (process.env.CI) {
-    if (process.env.BS_USERNAME && process.env.BS_AUTHKEY) {
-      config.browsers = Object.keys(config.customLaunchers);
-      config.captureTimeout = 0;
-    }
-    else {
-      config.browsers = ['PhantomJS'];
-    }
+    config.browsers = Object.keys(config.customLaunchers);
+    config.captureTimeout = 0;
     config.reporters.push('coveralls');
   }
 
