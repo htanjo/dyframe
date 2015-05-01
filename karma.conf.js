@@ -31,7 +31,10 @@ module.exports = function (config) {
       dir : 'coverage/'
     },
 
-    // Browser test on Sauce Labs
+    // Browser test on BrowserStack
+    browserStack: {
+      project: 'htanjo/dyframe'
+    },
     customLaunchers: {
       'BS_Chrome': {
         base: 'BrowserStack',

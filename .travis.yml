@@ -4,7 +4,5 @@ node_js:
 - '0.12'
 env:
   global:
-  - BS_AUTOMATE_PROJECT="$TRAVIS_REPO_SLUG"
-  - BS_AUTOMATE_BUILD="Travis build No. $TRAVIS_BUILD_NUMBER for $TRAVIS_REPO_SLUG"
   - secure: c8x8UTluga9fS784dvlIxTpykKxIOqjyF0x2I27MzUO7Qim1xBvGqsjIaznOqkVU4Hv/yWtfP69gAAtaQl/5dbp41cbQkyAHp8u5esDKBjPxU2MijoDjYLBOaoaSW5RUKLmuBttnDI6qab5nRKQgqIXcdNK7MQOhyGMFf5wNMbc=
   - secure: Cy7mwmE7gAhlnMorD3EOiaAeuJFLGUWT/RUbLZmglsVBU6dzthy9tj5VBBskVA906CaHS3BjOupAngyPOofeCJaCV3C5v0+j1w/bF0Bgi0qHyA6UxtaxyXFpu8PSgnR2djD8vorQurTyH3Cm1lk+h784KLEcHw9IFJCE3OdEb9U=
