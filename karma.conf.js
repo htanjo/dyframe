@@ -100,7 +100,6 @@ module.exports = function (config) {
   if (process.env.CI) {
     if (process.env.BROWSER_STACK_USERNAME && process.env.BROWSER_STACK_ACCESS_KEY) {
       config.browsers = Object.keys(config.customLaunchers);
-      config.captureTimeout = 0;
     }
     else {
       config.browsers = ['PhantomJS'];
