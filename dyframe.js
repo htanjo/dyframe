@@ -2,7 +2,7 @@
  * Dyframe
  * @version 0.5.0
  * @link https://github.com/htanjo/dyframe
- * @author Tanjo, Hiroyuki
+ * @author Hiroyuki Tanjo
  * @license MIT
  */
 (function (window, document, undefined) {

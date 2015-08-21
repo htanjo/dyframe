@@ -26,7 +26,7 @@ var banner = [
   ' * @version <%= pkg.version %>',
   ' * @link <%= pkg.homepage %>',
   ' * @author <%= pkg.author %>',
-  ' * @license <%= pkg.license.type %>',
+  ' * @license <%= pkg.license %>',
   ' */',
   ''].join('\n');
 var scripts = [

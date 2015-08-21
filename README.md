@@ -187,7 +187,7 @@ Dyframe works on most modern browsers including smart devices.
 - AMD
 
 ## License
-Copyright (c) 2015 Tanjo, Hiroyuki. Licensed under the [MIT License](LICENSE).
+Copyright (c) 2015 Hiroyuki Tanjo. Licensed under the [MIT License](LICENSE).
 
 [bower-image]: https://img.shields.io/bower/v/dyframe.svg
 [bower-url]: http://bower.io/

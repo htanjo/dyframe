@@ -2,7 +2,7 @@
   "name": "dyframe",
   "version": "0.5.0",
   "description": "Dynamically render responsive HTML into iframe.",
-  "author": "Tanjo, Hiroyuki",
+  "author": "Hiroyuki Tanjo",
   "license": "MIT",
   "repository": {
     "type": "git",
