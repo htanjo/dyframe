@@ -8,7 +8,7 @@
     "type": "git",
     "url": "https://github.com/htanjo/dyframe.git"
   },
-  "homepage": "https://github.com/htanjo/dyframe",
+  "homepage": "http://htanjo.github.io/dyframe/",
   "bugs": "https://github.com/htanjo/dyframe/issues",
   "keywords": [
     "javascript",
@@ -25,9 +25,7 @@
   "main": "dyframe.js",
   "files": [
     "dyframe.js",
-    "dyframe.min.js",
-    "LICENSE",
-    "CHANGELOG.md"
+    "dyframe.min.js"
   ],
   "devDependencies": {
     "browser-sync": "^2.6.1",
