@@ -37,9 +37,7 @@ var scripts = [
   'test/spec/*.js'
 ];
 
-gulp.task('clean', function (callback) {
-  del('coverage', callback);
-});
+gulp.task('clean', del.bind(null, ['coverage']));
 
 gulp.task('jshint', function () {
   return gulp.src(scripts)
@@ -126,4 +124,6 @@ gulp.task('release', function (callback) {
   runSequence('test', 'bump', 'commit', 'tag', callback);
 });
 
-gulp.task('default', ['test', 'build']);
+gulp.task('default', function (callback) {
+  runSequence('test', 'build', callback);
+});
