@@ -3,7 +3,7 @@
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var fs = require('fs');
-var karma = require('karma').server;
+var Karma = require('karma').Server;
 var bs = require('browser-sync').create();
 var runSequence = require('run-sequence');
 var minimist = require('minimist');
@@ -47,9 +47,9 @@ gulp.task('jshint', function () {
 });
 
 gulp.task('karma', ['clean'], function (callback) {
-  karma.start({
+  new Karma({
     configFile: __dirname + '/karma.conf.js'
-  }, callback);
+  }, callback).start();
 });
 
 gulp.task('scripts', function () {
@@ -62,7 +62,7 @@ gulp.task('scripts', function () {
     .pipe(gulp.dest('.'));
 });
 
-gulp.task('serve', ['clean'], function () {
+gulp.task('serve', ['clean'], function (callback) {
   bs.init({
     server: {
       baseDir: ['src', 'demo'],
@@ -71,11 +71,12 @@ gulp.task('serve', ['clean'], function () {
     open: false
   }, function () {
     opn('http://localhost:3000/demo.html');
+    callback();
   });
-  karma.start({
+  new Karma({
     configFile: __dirname + '/karma.conf.js',
     singleRun: false
-  });
+  }).start();
   gulp.watch([
     'demo/*',
     'src/*.js'
