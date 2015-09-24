@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.5.1 (2015-09-24)
+- Implement [UMD](https://github.com/umdjs/umd) (Universal Module Definition) correctly.
+
 ## 0.5.0 (2015-04-24)
 - Add `interval` option to prevent frequent re-rendering.
 
