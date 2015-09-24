@@ -4,7 +4,7 @@ var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var fs = require('fs');
 var karma = require('karma').server;
-var browserSync = require('browser-sync');
+var bs = require('browser-sync').create();
 var runSequence = require('run-sequence');
 var minimist = require('minimist');
 var del = require('del');
@@ -43,7 +43,7 @@ gulp.task('jshint', function () {
   return gulp.src(scripts)
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'))
-    .pipe($.if(!browserSync.active, $.jshint.reporter('fail')));
+    .pipe($.if(!bs.active, $.jshint.reporter('fail')));
 });
 
 gulp.task('karma', ['clean'], function (callback) {
@@ -63,14 +63,13 @@ gulp.task('scripts', function () {
 });
 
 gulp.task('serve', ['clean'], function () {
-  browserSync({
+  bs.init({
     server: {
       baseDir: ['src', 'demo'],
     },
     notify: false,
     open: false
-  });
-  browserSync.emitter.once('init', function () {
+  }, function () {
     opn('http://localhost:3000/demo.html');
   });
   karma.start({
@@ -80,7 +79,7 @@ gulp.task('serve', ['clean'], function () {
   gulp.watch([
     'demo/*',
     'src/*.js'
-  ]).on('change', browserSync.reload);
+  ]).on('change', bs.reload);
   gulp.watch(scripts, ['jshint']);
 });
 
