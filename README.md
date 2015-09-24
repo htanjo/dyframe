@@ -197,5 +197,5 @@ Copyright (c) 2015 Hiroyuki Tanjo. Licensed under the [MIT License](LICENSE).
 [travis-url]: https://travis-ci.org/htanjo/dyframe
 [coveralls-image]: https://img.shields.io/coveralls/htanjo/dyframe/master.svg
 [coveralls-url]: https://coveralls.io/r/htanjo/dyframe
-[uncompressed-url]: https://github.com/htanjo/dyframe/raw/v0.5.0/dyframe.js
-[minified-url]: https://github.com/htanjo/dyframe/raw/v0.5.0/dyframe.min.js
+[uncompressed-url]: https://github.com/htanjo/dyframe/raw/v0.5.1/dyframe.js
+[minified-url]: https://github.com/htanjo/dyframe/raw/v0.5.1/dyframe.min.js

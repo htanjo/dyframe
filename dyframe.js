@@ -1,6 +1,6 @@
 /*!
  * Dyframe
- * @version 0.5.0
+ * @version 0.5.1
  * @link https://github.com/htanjo/dyframe
  * @author Hiroyuki Tanjo
  * @license MIT

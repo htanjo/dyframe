@@ -1,6 +1,6 @@
 {
   "name": "dyframe",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Dynamically render responsive HTML into iframe.",
   "authors": [
     "Hiroyuki Tanjo"
