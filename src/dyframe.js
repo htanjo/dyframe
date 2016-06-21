@@ -40,6 +40,70 @@
     interval: 0
   };
 
+  // Utility for merging objects
+  var mergeObjects = function () {
+    var merged = arguments[0];
+    var i;
+    var prop;
+    for (i = 1; i < arguments.length; i++) {
+      for (prop in arguments[i]) {
+        if (arguments[i].hasOwnProperty(prop)) {
+          merged[prop] = arguments[i][prop];
+        }
+      }
+    }
+    return merged;
+  };
+
+  // Utility for setting styles
+  var setStyles = function (element, styles) {
+    var prop;
+    for (prop in styles) {
+      element.style[prop] = styles[prop];
+    }
+  };
+
+  // Utility for adding class
+  var addClass = function (element, className) {
+    if (element.classList) {
+      element.classList.add(className);
+    }
+    else {
+      element.className += ' ' + className;
+    }
+  };
+
+  // Utility for removing class
+  var removeClass = function (element, className) {
+    if (element.classList) {
+      element.classList.remove(className);
+    }
+    else {
+      var pattern = new RegExp('(^|\\s)' + className + '(?!\\S)', 'g');
+      element.className = element.className.replace(pattern, '');
+    }
+  };
+
+  // Utility for removing prefixed classes (e.g. "df-profile-*")
+  var removePrefixedClass = function (element, classPrefix) {
+    var pattern = new RegExp('(^|\\s)' + classPrefix + '\\S+', 'g');
+    element.className = element.className.replace(pattern, '');
+  };
+
+  // Get inner width/height of element
+  var getInnerSize = function (element) {
+    var style = window.getComputedStyle(element);
+    var paddingTop = parseInt(style.getPropertyValue('padding-top'), 0);
+    var paddingLeft = parseInt(style.getPropertyValue('padding-left'), 0);
+    var paddingRight = parseInt(style.getPropertyValue('padding-right'), 0);
+    var paddingBottom = parseInt(style.getPropertyValue('padding-bottom'), 0);
+    var innerSize = {
+      width: element.clientWidth - (paddingLeft + paddingRight),
+      height: element.clientHeight - (paddingTop + paddingBottom)
+    };
+    return innerSize;
+  };
+
   // Constructor
   var Dyframe = function (element, options) {
     this.element = element;
@@ -213,70 +277,6 @@
     };
     var profile = mergeObjects({}, profileDefaults, profileData);
     profiles[name] = profile;
-  };
-
-  // Utility for merging objects
-  var mergeObjects = function () {
-    var merged = arguments[0];
-    var i;
-    var prop;
-    for (i = 1; i < arguments.length; i++) {
-      for (prop in arguments[i]) {
-        if (arguments[i].hasOwnProperty(prop)) {
-          merged[prop] = arguments[i][prop];
-        }
-      }
-    }
-    return merged;
-  };
-
-  // Utility for setting styles
-  var setStyles = function (element, styles) {
-    var prop;
-    for (prop in styles) {
-      element.style[prop] = styles[prop];
-    }
-  };
-
-  // Utility for adding class
-  var addClass = function (element, className) {
-    if (element.classList) {
-      element.classList.add(className);
-    }
-    else {
-      element.className += ' ' + className;
-    }
-  };
-
-  // Utility for removing class
-  var removeClass = function (element, className) {
-    if (element.classList) {
-      element.classList.remove(className);
-    }
-    else {
-      var pattern = new RegExp('(^|\\s)' + className + '(?!\\S)', 'g');
-      element.className = element.className.replace(pattern, '');
-    }
-  };
-
-  // Utility for removing prefixed classes (e.g. "df-profile-*")
-  var removePrefixedClass = function (element, classPrefix) {
-    var pattern = new RegExp('(^|\\s)' + classPrefix + '\\S+', 'g');
-    element.className = element.className.replace(pattern, '');
-  };
-
-  // Get inner width/height of element
-  var getInnerSize = function (element) {
-    var style = window.getComputedStyle(element);
-    var paddingTop = parseInt(style.getPropertyValue('padding-top'), 0);
-    var paddingLeft = parseInt(style.getPropertyValue('padding-left'), 0);
-    var paddingRight = parseInt(style.getPropertyValue('padding-right'), 0);
-    var paddingBottom = parseInt(style.getPropertyValue('padding-bottom'), 0);
-    var innerSize = {
-      width: element.clientWidth - (paddingLeft + paddingRight),
-      height: element.clientHeight - (paddingTop + paddingBottom)
-    };
-    return innerSize;
   };
 
   return Dyframe;
