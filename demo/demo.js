@@ -97,15 +97,15 @@
     var renderProfile = null;
     setInterval(function () {
       switch (renderProfile) {
-        case null:
-          renderProfile = 'tablet';
-          break;
         case 'tablet':
           renderProfile = 'smartphone';
           break;
         case 'smartphone':
           renderProfile = null;
           break;
+        case null:
+        default:
+          renderProfile = 'tablet';
       }
       renderDyframe.render({
         profile: renderProfile
@@ -138,5 +138,4 @@
   setTimeout(function () {
     updateHtml();
   }, 1000);
-
-}).call(this);
+}());

@@ -1,8 +1,10 @@
+/* eslint-env node */
 'use strict';
 
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var fs = require('fs');
+var path = require('path');
 var Karma = require('karma').Server;
 var bs = require('browser-sync').create();
 var runSequence = require('run-sequence');
@@ -39,16 +41,16 @@ var scripts = [
 
 gulp.task('clean', del.bind(null, ['coverage']));
 
-gulp.task('jshint', function () {
+gulp.task('eslint', function () {
   return gulp.src(scripts)
-    .pipe($.jshint())
-    .pipe($.jshint.reporter('jshint-stylish'))
-    .pipe($.if(!bs.active, $.jshint.reporter('fail')));
+    .pipe($.eslint())
+    .pipe($.eslint.format())
+    .pipe($.eslint.failAfterError());
 });
 
 gulp.task('karma', ['clean'], function (callback) {
   new Karma({
-    configFile: __dirname + '/karma.conf.js'
+    configFile: path.resolve('./karma.conf.js')
   }, callback).start();
 });
 
@@ -65,7 +67,7 @@ gulp.task('scripts', function () {
 gulp.task('serve', ['clean'], function (callback) {
   bs.init({
     server: {
-      baseDir: ['src', 'demo'],
+      baseDir: ['src', 'demo']
     },
     notify: false,
     open: false
@@ -74,19 +76,19 @@ gulp.task('serve', ['clean'], function (callback) {
     callback();
   });
   new Karma({
-    configFile: __dirname + '/karma.conf.js',
+    configFile: path.resolve('./karma.conf.js'),
     singleRun: false
   }).start();
   gulp.watch([
     'demo/*',
     'src/*.js'
   ]).on('change', bs.reload);
-  gulp.watch(scripts, ['jshint']);
+  gulp.watch(scripts, ['eslint']);
 });
 
 gulp.task('link', function () {
   var downloadBase = 'https://github.com/htanjo/dyframe/raw/';
-  var pattern = new RegExp(downloadBase + '.*?[\/]', 'g');
+  var pattern = new RegExp(downloadBase + '.*?[/]', 'g');
   var version = getJson('package.json').version;
   var downloadDir = downloadBase + 'v' + version + '/';
   return gulp.src(['README.md', 'demo/index.html'], {base: '.'})
@@ -116,7 +118,7 @@ gulp.task('deploy', ['test'], function () {
     .pipe($.ghPages());
 });
 
-gulp.task('test', ['jshint', 'karma']);
+gulp.task('test', ['eslint', 'karma']);
 
 gulp.task('build', ['scripts']);
 

@@ -1,7 +1,8 @@
+/* eslint-env node */
+/* eslint-disable quote-props */
 'use strict';
 
 module.exports = function (config) {
-
   config.set({
     basePath: '',
     frameworks: ['mocha', 'chai'],
@@ -26,8 +27,8 @@ module.exports = function (config) {
       }
     },
     coverageReporter: {
-      type : 'lcov',
-      dir : 'coverage/'
+      type: 'lcov',
+      dir: 'coverage/'
     },
 
     // Browser test on Sauce Labs
@@ -92,11 +93,9 @@ module.exports = function (config) {
       config.reporters.push('saucelabs');
       config.browsers = Object.keys(config.customLaunchers);
       config.captureTimeout = 0;
-    }
-    else {
+    } else {
       config.browsers = ['PhantomJS'];
     }
     config.reporters.push('coveralls');
   }
-
 };

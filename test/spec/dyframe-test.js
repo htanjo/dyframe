@@ -1,4 +1,5 @@
-/* jshint mocha: true, expr: true */
+/* eslint-env mocha */
+/* eslint-disable no-unused-expressions */
 /* global expect */
 (function () {
   'use strict';
@@ -12,15 +13,12 @@
     if (element.classList) {
       return element.classList.contains(className);
     }
-    else {
-      return new RegExp('(^|\\s)' + className + '(?!\\S)', 'g').test(element.className);
-    }
+    return new RegExp('(^|\\s)' + className + '(?!\\S)', 'g').test(element.className);
   };
   var addClass = function (element, className) {
     if (element.classList) {
       element.classList.add(className);
-    }
-    else {
+    } else {
       element.className += ' ' + className;
     }
   };
@@ -32,9 +30,7 @@
 
   // Specs
   describe('Dyframe', function () {
-
     describe('.addProfile()', function () {
-
       afterEach(function () {
         dyframe.destroy();
       });
@@ -46,11 +42,9 @@
         });
         expect(dyframe.hasActiveProfile()).to.be.true;
       });
-
     });
 
     describe('Constructor', function () {
-
       afterEach(function () {
         dyframe.destroy();
       });
@@ -109,15 +103,11 @@
         });
         expect(hasClass(element, 'df-profile-smartphone')).to.be.true;
       });
-
     });
-
   });
 
   describe('dyframe', function () {
-
     describe('.render()', function () {
-
       var iframe;
       var body;
 
@@ -296,11 +286,9 @@
           }, 0);
         }, 0);
       });
-
     });
 
     describe('.destroy()', function () {
-
       beforeEach(function () {
         dyframe = new Dyframe(element, {
           html: '<html><body>Hello, world!</body></html>'
@@ -331,12 +319,11 @@
       it('can be called twice, but does nothing', function () {
         dyframe.destroy();
         expect(element.innerHTML).to.be.empty;
-        expect(function () {dyframe.destroy();}).to.not.throw(Error);
+        expect(function () {
+          dyframe.destroy();
+        }).to.not.throw(Error);
         expect(element.innerHTML).to.be.empty;
       });
-
     });
-
   });
-
 }());

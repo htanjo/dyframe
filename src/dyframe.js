@@ -1,16 +1,12 @@
 (function (global, factory) {
   'use strict';
-
   if (typeof define === 'function' && define.amd) {
     define(factory);
-  }
-  else if (typeof module === 'object' && module.exports) {
+  } else if (typeof module === 'object' && module.exports) {
     module.exports = factory();
-  }
-  else {
+  } else {
     global.Dyframe = factory();
   }
-
 }(this, function () {
   'use strict';
 
@@ -47,7 +43,7 @@
     var prop;
     for (i = 1; i < arguments.length; i++) {
       for (prop in arguments[i]) {
-        if (arguments[i].hasOwnProperty(prop)) {
+        if ({}.hasOwnProperty.call(arguments[i], prop)) {
           merged[prop] = arguments[i][prop];
         }
       }
@@ -59,7 +55,9 @@
   var setStyles = function (element, styles) {
     var prop;
     for (prop in styles) {
-      element.style[prop] = styles[prop];
+      if ({}.hasOwnProperty.call(styles, prop)) {
+        element.style[prop] = styles[prop];
+      }
     }
   };
 
@@ -67,8 +65,7 @@
   var addClass = function (element, className) {
     if (element.classList) {
       element.classList.add(className);
-    }
-    else {
+    } else {
       element.className += ' ' + className;
     }
   };
@@ -77,8 +74,7 @@
   var removeClass = function (element, className) {
     if (element.classList) {
       element.classList.remove(className);
-    }
-    else {
+    } else {
       var pattern = new RegExp('(^|\\s)' + className + '(?!\\S)', 'g');
       element.className = element.className.replace(pattern, '');
     }
@@ -186,7 +182,7 @@
 
   // Check if active profile is given
   Dyframe.prototype.hasActiveProfile = function () {
-    return !!(this.options.profile && profiles[this.options.profile]);
+    return Boolean(this.options.profile && profiles[this.options.profile]);
   };
 
   // Update class name of dyframe.element
@@ -280,5 +276,4 @@
   };
 
   return Dyframe;
-
 }));
