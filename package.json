@@ -43,7 +43,7 @@
     "gulp-replace": "^0.5.3",
     "gulp-uglify": "^1.2.0",
     "jshint-stylish": "^2.0.1",
-    "karma": "^0.13.10",
+    "karma": "^1.1.1",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^0.2.0",
     "karma-coverage": "^0.5.2",
